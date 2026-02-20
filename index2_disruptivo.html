@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santander Cycling | Revoluciona tu Ruta</title>
+  <meta name="description" content="Descubre Santander en bicicleta como nunca antes. Experiencias inmersivas, tecnología, comunidad y aventura en cada kilómetro.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Ccircle cx='50' cy='30' r='25' fill='none' stroke='%23D4A853' stroke-width='8'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #0A0A0A; color: #fff; }
+    .font-title { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+    .hero-disruptive { background: linear-gradient(120deg, #0D3B3E 60%, #D4A853 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+    .glass { background: rgba(255,255,255,0.08); border-radius: 2rem; box-shadow: 0 8px 40px rgba(0,0,0,0.18); backdrop-filter: blur(8px); }
+    .btn-disrupt { background: #0D3B3E; color: #D4A853; font-weight: 700; border-radius: 9999px; transition: background 0.2s; border: 2px solid #D4A853; }
+    .btn-disrupt:hover { background: #D4A853; color: #0D3B3E; }
+    .neon { text-shadow: 0 0 8px #D4A853, 0 0 16px #D4A85344; }
+    .card-3d { background: linear-gradient(135deg, #181818 60%, #0D3B3E 100%); border-radius: 1.5rem; box-shadow: 0 4px 32px rgba(0,0,0,0.18); transform: rotateY(-6deg) skewY(2deg); }
+    .floating { animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="w-full py-6 px-8 flex justify-between items-center fixed top-0 left-0 z-40 bg-[#0A0A0A]/80 backdrop-blur-md">
+    <div class="flex items-center gap-3">
+      <svg class="w-10 h-10" viewBox="0 0 100 60"><circle cx="50" cy="30" r="25" stroke="#D4A853" stroke-width="6" fill="none"/><path d="M30 30 Q50 10 70 30" stroke="#fff" stroke-width="6" fill="none"/></svg>
+      <span class="font-title text-2xl tracking-widest">SANTANDER CYCLING</span>
+    </div>
+    <div class="hidden md:flex gap-10 text-lg">
+      <a href="#inmersiva" class="hover:text-[#D4A853] transition">Inmersiva</a>
+      <a href="#tecnologia" class="hover:text-[#D4A853] transition">Tecnología</a>
+      <a href="#comunidad" class="hover:text-[#D4A853] transition">Comunidad</a>
+      <a href="#contacto" class="hover:text-[#D4A853] transition">Contacto</a>
+    </div>
+    <a href="#contacto" class="btn-disrupt px-7 py-2 ml-4">Únete</a>
+  </nav>
+
+  <!-- HERO DISRUPTIVO -->
+  <section class="hero-disruptive">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/80 to-[#D4A853]/10"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center glass p-14 mt-24 floating">
+      <h1 class="font-title text-6xl md:text-8xl mb-4 neon">Revoluciona tu Ruta</h1>
+      <p class="text-[#D4A853] text-2xl font-semibold mb-6 tracking-widest uppercase">Santander Cycling 2.0</p>
+      <p class="text-lg md:text-2xl mb-8">Sumérgete en una experiencia ciclista inmersiva: rutas interactivas, retos en tiempo real, comunidad global y tecnología de vanguardia.</p>
+      <a href="#inmersiva" class="btn-disrupt px-10 py-4 text-lg">Explora el Futuro</a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA INMERSIVA -->
+  <section id="inmersiva" class="max-w-6xl mx-auto py-24 px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=800" alt="Realidad aumentada Santander" class="rounded-2xl shadow-xl w-full object-cover card-3d">
+      </div>
+      <div>
+        <h2 class="font-title text-4xl md:text-5xl mb-4">Rutas con Realidad Aumentada</h2>
+        <p class="mb-6 text-white/80">Vive Santander con rutas que cobran vida en tu móvil: desafíos interactivos, checkpoints virtuales y recompensas digitales.</p>
+        <ul class="mb-6 space-y-2">
+          <li>🕶️ Realidad aumentada en ruta</li>
+          <li>🏆 Retos y logros desbloqueables</li>
+          <li>📱 App exclusiva para ciclistas</li>
+          <li>🌎 Ranking global en vivo</li>
+        </ul>
+        <a href="#tecnologia" class="btn-disrupt px-8 py-3 text-lg">Ver tecnología</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGÍA Y DATOS -->
+  <section id="tecnologia" class="bg-[#181818] py-20 px-6">
+    <h2 class="font-title text-4xl md:text-5xl mb-10 text-center">Tecnología en Cada Pedalada</h2>
+    <div class="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+      <div class="glass p-7 text-center flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=400" alt="Sensores" class="rounded-xl mb-4 mx-auto h-40 w-full object-cover">
+        <h3 class="font-title text-2xl mb-2">Sensores Inteligentes</h3>
+        <p>Monitorea tu rendimiento y comparte tus logros en tiempo real.</p>
+      </div>
+      <div class="glass p-7 text-center flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400" alt="App móvil" class="rounded-xl mb-4 mx-auto h-40 w-full object-cover">
+        <h3 class="font-title text-2xl mb-2">App Social</h3>
+        <p>Conecta con ciclistas, crea grupos y reta a tus amigos.</p>
+      </div>
+      <div class="glass p-7 text-center flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?q=80&w=400" alt="Gamificación" class="rounded-xl mb-4 mx-auto h-40 w-full object-cover">
+        <h3 class="font-title text-2xl mb-2">Gamificación</h3>
+        <p>Convierte cada ruta en un juego: colecciona medallas y sube de nivel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMUNIDAD GLOBAL -->
+  <section id="comunidad" class="max-w-6xl mx-auto py-24 px-6">
+    <h2 class="font-title text-4xl md:text-5xl mb-10 text-center">Comunidad Global</h2>
+    <div class="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+      <div class="card-3d p-7 text-center flex flex-col items-center">
+        <p class="italic mb-4">"Pedaleé con ciclistas de 5 países en una sola ruta. ¡Increíble!"</p>
+        <span class="text-[#D4A853] font-bold">- Diego R.</span>
+      </div>
+      <div class="card-3d p-7 text-center flex flex-col items-center">
+        <p class="italic mb-4">"La app me motivó a superar mis límites y conocer nuevos amigos."</p>
+        <span class="text-[#D4A853] font-bold">- Mariana S.</span>
+      </div>
+      <div class="card-3d p-7 text-center flex flex-col items-center">
+        <p class="italic mb-4">"Los retos virtuales hacen cada salida única y divertida."</p>
+        <span class="text-[#D4A853] font-bold">- Jean P.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-20 px-6 bg-[#0A0A0A]">
+    <h2 class="font-title text-4xl md:text-5xl mb-8 text-center">Contáctanos</h2>
+    <form class="max-w-lg mx-auto glass p-8 flex flex-col gap-4">
+      <input type="text" name="nombre" placeholder="Nombre" required class="p-3 rounded-lg bg-[#222]/80 border-none outline-none">
+      <input type="email" name="email" placeholder="Email" required class="p-3 rounded-lg bg-[#222]/80 border-none outline-none">
+      <textarea name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?" required class="p-3 rounded-lg bg-[#222]/80 border-none outline-none"></textarea>
+      <button type="submit" class="btn-disrupt px-8 py-3 text-lg mt-2">Enviar</button>
+    </form>
+  </section>
+
+  <footer class="text-center py-8 text-[#D4A853] bg-[#0A0A0A] font-title text-lg tracking-widest">© 2026 Santander Cycling</footer>
+</body>
+</html>

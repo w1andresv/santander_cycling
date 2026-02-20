@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santander Cycling | Ride the Unexpected</title>
+  <meta name="description" content="Vivid adventure, rutas únicas y comunidad ciclista en Santander. Explora, conecta y vive la experiencia.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='25' fill='none' stroke='%234FC3F7' stroke-width='6'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #FFF8E1; color: #263238; }
+    .font-title { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+    .hand-drawn { font-family: 'Comic Sans MS', 'Comic Sans', cursive; }
+    .hero-collage { background: linear-gradient(90deg, #FFF8E1 60%, #4FC3F7 100%); }
+    .badge { background: #AEEA00; color: #263238; border-radius: 1.5rem; padding: 0.5rem 1.5rem; font-weight: bold; display: inline-block; margin: 0.5rem; box-shadow: 0 2px 8px #AEEA0033; }
+    .btn-coral { background: #FF6F61; color: #fff; border-radius: 9999px; font-weight: 700; transition: transform 0.2s, background 0.2s; }
+    .btn-coral:hover { background: #ff8a80; transform: scale(1.07); }
+    .section-divider { border: none; border-top: 3px dashed #AEEA00; margin: 3rem 0; }
+    .carousel-card { background: #fff; border-radius: 1.5rem; box-shadow: 0 4px 24px #26323822; min-width: 260px; margin-right: 1.5rem; display: inline-block; vertical-align: top; }
+    .testimonial-bubble { background: #4FC3F7; color: #fff; border-radius: 2rem 2rem 2rem 0; padding: 1.5rem; margin: 1rem; position: relative; }
+    .testimonial-bubble:after { content: ''; position: absolute; left: 1.5rem; bottom: -1.2rem; width: 2rem; height: 2rem; background: #4FC3F7; border-radius: 0 0 2rem 2rem; }
+    .map-illustration { background: linear-gradient(120deg, #FFF8E1 60%, #AEEA00 100%); border-radius: 2rem; box-shadow: 0 4px 32px #AEEA0033; }
+    .icon-hand { display: inline-block; vertical-align: middle; margin-right: 0.5rem; }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="w-full py-5 px-8 flex justify-between items-center fixed top-0 left-0 z-40 bg-white/90 shadow-md">
+    <div class="flex items-center gap-3">
+      <span class="hand-drawn text-3xl text-[#FF6F61]">🚲</span>
+      <span class="font-title text-2xl tracking-widest hand-drawn">Santander Cycling</span>
+    </div>
+    <div class="hidden md:flex gap-8 text-lg font-semibold">
+      <a href="#explore" class="hover:text-[#FF6F61] transition">Explora</a>
+      <a href="#adventures" class="hover:text-[#4FC3F7] transition">Aventuras</a>
+      <a href="#routes" class="hover:text-[#AEEA00] transition">Rutas</a>
+      <a href="#stories" class="hover:text-[#FF6F61] transition">Historias</a>
+      <a href="#contact" class="hover:text-[#4FC3F7] transition">Contacto</a>
+    </div>
+    <a href="#contact" class="btn-coral px-7 py-2 ml-4">Comienza</a>
+  </nav>
+
+  <!-- HERO COLLAGE -->
+  <section class="hero-collage min-h-screen flex items-center justify-center pt-32 pb-16">
+    <div class="grid md:grid-cols-2 gap-10 items-center w-full max-w-6xl px-6">
+      <div>
+        <h1 class="font-title text-5xl md:text-7xl mb-4 relative">
+          <span class="relative z-10">Ride the <span class="text-[#FF6F61]">Unexpected</span></span>
+          <svg class="absolute left-0 top-12 w-40 h-8" viewBox="0 0 200 30"><path d="M0 20 Q50 0 100 20 T200 20" stroke="#AEEA00" stroke-width="4" fill="none"/></svg>
+        </h1>
+        <p class="text-xl mb-8">Explora Santander en bicicleta con rutas únicas, experiencias vibrantes y una comunidad que te inspira a ir más allá.</p>
+        <a href="#explore" class="btn-coral px-10 py-4 text-lg">Empieza tu aventura</a>
+      </div>
+      <div class="relative flex justify-center">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600" alt="Collage Santander" class="rounded-3xl shadow-xl w-80 h-80 object-cover border-8 border-[#AEEA00]">
+        <svg class="absolute -top-8 -right-8 w-20 h-20" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" stroke="#4FC3F7" stroke-width="6" fill="none"/></svg>
+        <svg class="absolute bottom-0 left-0 w-16 h-16" viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" stroke="#FF6F61" stroke-width="5" fill="none"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- WHY SANTANDER -->
+  <section id="explore" class="max-w-5xl mx-auto py-12 px-6 text-center">
+    <h2 class="font-title text-4xl md:text-5xl mb-6">¿Por qué Santander?</h2>
+    <p class="mb-8 text-lg">Paisajes únicos, cultura vibrante y rutas para todos los niveles. Descubre el corazón ciclista de Colombia.</p>
+    <div class="flex flex-wrap justify-center gap-6">
+      <span class="badge">🏖️ Costa</span>
+      <span class="badge">⛰️ Montañas</span>
+      <span class="badge">🏙️ Urbano</span>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SIGNATURE EXPERIENCES CAROUSEL -->
+  <section id="adventures" class="max-w-6xl mx-auto py-12 px-6">
+    <h2 class="font-title text-4xl md:text-5xl mb-8 text-center">Experiencias Destacadas</h2>
+    <div class="overflow-x-auto whitespace-nowrap pb-4">
+      <div class="carousel-card w-72 inline-block align-top mr-6">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400" alt="Sunrise Coast Ride" class="rounded-t-2xl w-full h-40 object-cover">
+        <div class="p-5">
+          <h3 class="font-title text-2xl mb-2">Sunrise Coast Ride</h3>
+          <p class="mb-4">Pedalea al amanecer junto al mar y siente la energía de Santander.</p>
+          <a href="#routes" class="btn-coral px-5 py-2 text-base">Ver detalles</a>
+        </div>
+      </div>
+      <div class="carousel-card w-72 inline-block align-top mr-6">
+        <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?q=80&w=400" alt="Mountain Challenge" class="rounded-t-2xl w-full h-40 object-cover">
+        <div class="p-5">
+          <h3 class="font-title text-2xl mb-2">Mountain Challenge</h3>
+          <p class="mb-4">Conquista las cumbres y disfruta vistas espectaculares.</p>
+          <a href="#routes" class="btn-coral px-5 py-2 text-base">Ver detalles</a>
+        </div>
+      </div>
+      <div class="carousel-card w-72 inline-block align-top">
+        <img src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?q=80&w=400" alt="Urban Explorer" class="rounded-t-2xl w-full h-40 object-cover">
+        <div class="p-5">
+          <h3 class="font-title text-2xl mb-2">Urban Explorer</h3>
+          <p class="mb-4">Descubre la cultura y gastronomía de las ciudades en dos ruedas.</p>
+          <a href="#routes" class="btn-coral px-5 py-2 text-base">Ver detalles</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ROUTES & MAPS -->
+  <section id="routes" class="max-w-6xl mx-auto py-12 px-6">
+    <h2 class="font-title text-4xl md:text-5xl mb-8 text-center">Rutas & Mapas</h2>
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div class="map-illustration p-8 flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=400" alt="Mapa ilustrado" class="rounded-xl w-64 h-48 object-cover mb-4">
+        <p class="font-semibold">Explora rutas interactivas y encuentra tu próximo desafío.</p>
+      </div>
+      <div>
+        <ul class="space-y-5">
+          <li class="flex items-center gap-3">
+            <span class="icon-hand">✏️</span>
+            <span class="font-title text-lg">Ruta del Cañón</span>
+            <span class="badge">Difícil</span>
+            <span class="badge">60km</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="icon-hand">🖍️</span>
+            <span class="font-title text-lg">Barichara Colonial</span>
+            <span class="badge">Media</span>
+            <span class="badge">35km</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="icon-hand">🖌️</span>
+            <span class="font-title text-lg">Ruta Familiar</span>
+            <span class="badge">Fácil</span>
+            <span class="badge">18km</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- RIDER STORIES -->
+  <section id="stories" class="max-w-6xl mx-auto py-12 px-6">
+    <h2 class="font-title text-4xl md:text-5xl mb-8 text-center">Historias de Ciclistas</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="testimonial-bubble">
+        "¡Nunca imaginé rutas tan hermosas y una comunidad tan cálida!"
+        <div class="mt-3 font-bold text-[#263238]">- Laura G.</div>
+      </div>
+      <div class="testimonial-bubble">
+        "Cada salida es una nueva aventura. ¡Repetiré siempre!"
+        <div class="mt-3 font-bold text-[#263238]">- Carlos M.</div>
+      </div>
+      <div class="testimonial-bubble">
+        "La experiencia urbana y la comida local fueron lo mejor."
+        <div class="mt-3 font-bold text-[#263238]">- Ana P.</div>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#contact" class="btn-coral px-8 py-3 text-lg">Comparte tu historia</a>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CONTACTO -->
+  <section id="contact" class="py-16 px-6 bg-white">
+    <h2 class="font-title text-4xl md:text-5xl mb-8 text-center">Contáctanos</h2>
+    <form class="max-w-lg mx-auto bg-[#FFF8E1] p-8 rounded-2xl shadow-lg flex flex-col gap-4">
+      <input type="text" name="nombre" placeholder="Nombre" required class="p-3 rounded-lg bg-white border border-[#AEEA00] outline-none">
+      <input type="email" name="email" placeholder="Email" required class="p-3 rounded-lg bg-white border border-[#AEEA00] outline-none">
+      <textarea name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?" required class="p-3 rounded-lg bg-white border border-[#AEEA00] outline-none"></textarea>
+      <button type="submit" class="btn-coral px-8 py-3 text-lg mt-2">Enviar</button>
+    </form>
+    <div class="flex justify-center gap-6 mt-8">
+      <a href="#" class="text-3xl" title="Instagram">📸</a>
+      <a href="#" class="text-3xl" title="Facebook">📘</a>
+      <a href="#" class="text-3xl" title="WhatsApp">💬</a>
+    </div>
+  </section>
+
+  <footer class="text-center py-8 text-[#4FC3F7] bg-white font-title text-lg tracking-widest">© 2026 Santander Cycling</footer>
+</body>
+</html>
