@@ -148,7 +148,7 @@
 
     /* Stage card gradient */
     .stage-overlay {
-      background: linear-gradient(135deg, rgba(13, 13, 13,0.92) 0%, rgba(13,59,62,0.85) 100%);
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.85) 0%, rgba(10, 10, 10, 0.4) 50%, rgba(10, 10, 10, 0.1) 100%);
     }
 
     /* Experience card image zoom */
@@ -272,6 +272,40 @@
       pointer-events: all;
     }
 
+    /* Chicamocha Modal */
+    .chicamocha-modal {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .chicamocha-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .chicamocha-modal .modal-content {
+      transform: translateY(40px) scale(0.97);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chicamocha-modal.active .modal-content {
+      transform: translateY(0) scale(1);
+    }
+    .chicamocha-modal .gallery-thumb {
+      transition: all 0.3s ease;
+    }
+    .chicamocha-modal .gallery-thumb.active-thumb {
+      border-color: #999999;
+      opacity: 1;
+    }
+    .chicamocha-modal .gallery-thumb:not(.active-thumb) {
+      opacity: 0.4;
+    }
+    .chicamocha-modal .gallery-thumb:hover {
+      opacity: 0.8;
+    }
+    .modal-gallery-img {
+      transition: opacity 0.4s ease;
+    }
+
     /* Smooth transitions for lang switch */
     [data-lang-es], [data-lang-en] {
       transition: opacity 0.3s ease;
@@ -308,7 +342,7 @@
             style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1.5s ease-out 0.5s forwards" />
         </svg>
         <p
-          class="font-heading text-xl tracking-[0.3em] text-white/40 uppercase">Santander</p>
+          class="font-heading text-xl tracking-[0.3em] text-white uppercase">Santander</p>
       </div>
       <style>@keyframes draw{to{stroke-dashoffset:0}}</style>
     </div>
@@ -332,20 +366,20 @@
         <!-- Desktop Nav -->
         <div class="hidden lg:flex items-center gap-8">
           <a href="#about"
-            class="nav-link text-sm font-medium text-white/70 hover:text-accent transition-colors duration-300"
+            class="nav-link text-sm font-medium text-white hover:text-accent transition-colors duration-300"
             data-lang-es="Nosotros" data-lang-en="About Us">Nosotros</a>
           <a href="#chicamocha"
-            class="nav-link text-sm font-medium text-white/70 hover:text-accent transition-colors duration-300"
+            class="nav-link text-sm font-medium text-white hover:text-accent transition-colors duration-300"
             data-lang-es="La Ruta" data-lang-en="The Route">La Ruta</a>
           <a href="#experiences"
-            class="nav-link text-sm font-medium text-white/70 hover:text-accent transition-colors duration-300"
+            class="nav-link text-sm font-medium text-white hover:text-accent transition-colors duration-300"
             data-lang-es="Experiencias"
             data-lang-en="Experiences">Experiencias</a>
           <a href="#gallery"
-            class="nav-link text-sm font-medium text-white/70 hover:text-accent transition-colors duration-300"
+            class="nav-link text-sm font-medium text-white hover:text-accent transition-colors duration-300"
             data-lang-es="Galería" data-lang-en="Gallery">Galería</a>
           <a href="#contact"
-            class="nav-link text-sm font-medium text-white/70 hover:text-accent transition-colors duration-300"
+            class="nav-link text-sm font-medium text-white hover:text-accent transition-colors duration-300"
             data-lang-es="Contacto" data-lang-en="Contact">Contacto</a>
 
           <!-- Language Toggle -->
@@ -385,20 +419,20 @@
       <div id="mobile-menu"
         class="mobile-menu fixed inset-0 bg-primary-dark/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 lg:hidden z-40">
         <a href="#about"
-          class="mobile-link text-3xl font-heading tracking-wider text-white/80 hover:text-accent transition-colors"
+          class="mobile-link text-3xl font-heading tracking-wider text-white hover:text-accent transition-colors"
           data-lang-es="Nosotros" data-lang-en="About Us">Nosotros</a>
         <a href="#chicamocha"
-          class="mobile-link text-3xl font-heading tracking-wider text-white/80 hover:text-accent transition-colors"
+          class="mobile-link text-3xl font-heading tracking-wider text-white hover:text-accent transition-colors"
           data-lang-es="La Ruta" data-lang-en="The Route">La Ruta</a>
         <a href="#experiences"
-          class="mobile-link text-3xl font-heading tracking-wider text-white/80 hover:text-accent transition-colors"
+          class="mobile-link text-3xl font-heading tracking-wider text-white hover:text-accent transition-colors"
           data-lang-es="Experiencias"
           data-lang-en="Experiences">Experiencias</a>
         <a href="#gallery"
-          class="mobile-link text-3xl font-heading tracking-wider text-white/80 hover:text-accent transition-colors"
+          class="mobile-link text-3xl font-heading tracking-wider text-white hover:text-accent transition-colors"
           data-lang-es="Galería" data-lang-en="Gallery">Galería</a>
         <a href="#contact"
-          class="mobile-link text-3xl font-heading tracking-wider text-white/80 hover:text-accent transition-colors"
+          class="mobile-link text-3xl font-heading tracking-wider text-white hover:text-accent transition-colors"
           data-lang-es="Contacto" data-lang-en="Contact">Contacto</a>
         <a
           href="https://wa.me/573173780637?text=Hola!%20Quiero%20reservar%20un%20tour"
@@ -438,12 +472,12 @@
           & Experiences</p>
 
         <p
-          class="text-xl sm:text-2xl md:text-3xl font-light text-white/80 mb-4 italic">
+          class="text-xl sm:text-2xl md:text-3xl font-light text-white mb-4 italic">
           <span data-lang-es="Esta no es tu rodada de siempre..."
             data-lang-en="This isn't your regular ride...">Esta no es tu rodada
             de siempre...</span>
         </p>
-        <p class="text-base sm:text-lg text-white/50 mb-10 max-w-2xl mx-auto">
+        <p class="text-base sm:text-lg text-white mb-10 max-w-2xl mx-auto">
           <span
             data-lang-es="Rutas épicas por los cañones y montañas más impresionantes de Colombia"
             data-lang-en="Epic routes through Colombia's most breathtaking canyons and mountains">Rutas
@@ -475,7 +509,7 @@
       <div
         class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
         <span
-          class="text-xs text-white/40 tracking-widest uppercase font-accent"
+          class="text-xs text-white tracking-widest uppercase font-accent"
           data-lang-es="Descubre" data-lang-en="Discover">Descubre</span>
         <div class="scroll-indicator">
           <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor"
@@ -497,7 +531,7 @@
             <p
               class="font-accent font-bold text-4xl md:text-5xl text-accent counter-num"
               data-target="500">0</p>
-            <p class="text-sm text-white/40 mt-2 font-accent tracking-wider"
+            <p class="text-sm text-white mt-2 font-accent tracking-wider"
               data-lang-es="km de Rutas" data-lang-en="km of Routes">km de
               Rutas</p>
           </div>
@@ -506,7 +540,7 @@
             <p
               class="font-accent font-bold text-4xl md:text-5xl text-accent counter-num"
               data-target="15">0</p>
-            <p class="text-sm text-white/40 mt-2 font-accent tracking-wider"
+            <p class="text-sm text-white mt-2 font-accent tracking-wider"
               data-lang-es="Tours Realizados"
               data-lang-en="Tours Completed">Tours Realizados</p>
           </div>
@@ -515,7 +549,7 @@
             <p
               class="font-accent font-bold text-4xl md:text-5xl text-accent counter-num"
               data-target="28000">0</p>
-            <p class="text-sm text-white/40 mt-2 font-accent tracking-wider"
+            <p class="text-sm text-white mt-2 font-accent tracking-wider"
               data-lang-es="m+ de Desnivel" data-lang-en="m+ Elevation">m+ de
               Desnivel</p>
           </div>
@@ -530,7 +564,7 @@
                 data-target="4.9" data-decimals="1">0</p>
             </div>
             <p
-              class="text-sm text-white/40 mt-2 font-accent tracking-wider">Rating</p>
+              class="text-sm text-white mt-2 font-accent tracking-wider">Rating</p>
           </div>
         </div>
       </div>
@@ -555,7 +589,7 @@
                 data-lang-en="We ride where others don't">Pedaleamos donde
                 otros<br>no llegan</span>
             </h2>
-            <div class="space-y-4 text-white/60 text-base leading-relaxed">
+            <div class="space-y-4 text-white text-base leading-relaxed">
               <p
                 data-lang-es="Somos un equipo apasionado por el ciclismo y las montañas de Santander, Colombia. Con años de experiencia recorriendo cada curva del Cañón del Chicamocha, hemos diseñado rutas que combinan la adrenalina del ciclismo de carretera con la belleza salvaje de los Andes colombianos."
                 data-lang-en="We are a team passionate about cycling and the mountains of Santander, Colombia. With years of experience riding every curve of the Chicamocha Canyon, we've designed routes that combine road cycling adrenaline with the wild beauty of the Colombian Andes.">
@@ -586,7 +620,7 @@
                       stroke-width="2"
                       d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                 </div>
-                <span class="text-sm text-white/70"
+                <span class="text-sm text-white"
                   data-lang-es="Guías Certificados"
                   data-lang-en="Certified Guides">Guías Certificados</span>
               </div>
@@ -598,7 +632,7 @@
                       stroke-linecap="round" stroke-linejoin="round"
                       stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
-                <span class="text-sm text-white/70"
+                <span class="text-sm text-white"
                   data-lang-es="Vehículo de Soporte"
                   data-lang-en="Support Vehicle">Vehículo de Soporte</span>
               </div>
@@ -614,7 +648,7 @@
                       stroke-width="2"
                       d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </div>
-                <span class="text-sm text-white/70"
+                <span class="text-sm text-white"
                   data-lang-es="Fotografía Profesional"
                   data-lang-en="Professional Photography">Fotografía
                   Profesional</span>
@@ -628,7 +662,7 @@
                       stroke-width="2"
                       d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 </div>
-                <span class="text-sm text-white/70"
+                <span class="text-sm text-white"
                   data-lang-es="Alojamiento Premium"
                   data-lang-en="Premium Accommodation">Alojamiento
                   Premium</span>
@@ -649,7 +683,7 @@
             <div
               class="absolute -bottom-6 -left-6 bg-primary p-6 rounded-2xl shadow-2xl">
               <p class="font-accent font-bold text-3xl text-accent">5+</p>
-              <p class="text-xs text-white/60 mt-1"
+              <p class="text-xs text-white mt-1"
                 data-lang-es="Años de Experiencia"
                 data-lang-en="Years of Experience">Años de Experiencia</p>
             </div>
@@ -683,7 +717,7 @@
             class="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-none mb-4">
             THE ROAD TO<br><span class="text-accent">CHICAMOCHA</span>
           </h2>
-          <p class="text-lg text-white/50 max-w-2xl mx-auto"
+          <p class="text-lg text-white max-w-2xl mx-auto"
             data-lang-es="Una travesía de 7 días por las carreteras más espectaculares de Santander"
             data-lang-en="A 7-day journey through Santander's most spectacular roads">
             Una travesía de 7 días por las carreteras más espectaculares de
@@ -696,7 +730,7 @@
               class="countdown-unit rounded-xl px-4 py-3 text-center min-w-[70px]">
               <p class="font-accent font-bold text-2xl text-accent"
                 id="countdown-days">--</p>
-              <p class="text-[10px] text-white/40 uppercase tracking-wider"
+              <p class="text-[10px] text-white uppercase tracking-wider"
                 data-lang-es="Días" data-lang-en="Days">Días</p>
             </div>
             <span class="text-accent text-xl font-bold">:</span>
@@ -704,7 +738,7 @@
               class="countdown-unit rounded-xl px-4 py-3 text-center min-w-[70px]">
               <p class="font-accent font-bold text-2xl text-accent"
                 id="countdown-hours">--</p>
-              <p class="text-[10px] text-white/40 uppercase tracking-wider"
+              <p class="text-[10px] text-white uppercase tracking-wider"
                 data-lang-es="Horas" data-lang-en="Hours">Horas</p>
             </div>
             <span class="text-accent text-xl font-bold">:</span>
@@ -713,10 +747,10 @@
               <p class="font-accent font-bold text-2xl text-accent"
                 id="countdown-mins">--</p>
               <p
-                class="text-[10px] text-white/40 uppercase tracking-wider">Min</p>
+                class="text-[10px] text-white uppercase tracking-wider">Min</p>
             </div>
           </div>
-          <p class="text-sm text-white/30 mt-3 font-accent">5 — 12 <span
+          <p class="text-sm text-white mt-3 font-accent">5 — 12 <span
               data-lang-es="de Julio, 2026" data-lang-en="July, 2026">de Julio,
               2026</span></p>
         </div>
@@ -728,8 +762,8 @@
             class="stage-card card-tilt group rounded-2xl overflow-hidden relative"
             data-aos="fade-up" data-aos-delay="0">
             <img
-              src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=870&auto=format&fit=crop"
-              alt="Etapa 1"
+              src="images/chicamocha_road/landscape.webp"
+              alt="Etapa 1 - Bucaramanga a San Gil"
               class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy">
             <div
@@ -758,7 +792,7 @@
                         stop-color="transparent" /></lineargradient></defs>
                 </svg>
                 <div class="flex items-center gap-4 text-sm">
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -766,7 +800,7 @@
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
                     82 km
                   </span>
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -784,8 +818,8 @@
             class="stage-card card-tilt group rounded-2xl overflow-hidden relative"
             data-aos="fade-up" data-aos-delay="100">
             <img
-              src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?q=80&w=870&auto=format&fit=crop"
-              alt="Etapa 2"
+              src="images/chicamocha_road/barichara.webp"
+              alt="Etapa 2 - San Gil a Barichara"
               class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy">
             <div
@@ -808,7 +842,7 @@
                     fill="url(#grad1)" opacity="0.15" />
                 </svg>
                 <div class="flex items-center gap-4 text-sm">
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -816,7 +850,7 @@
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
                     65 km
                   </span>
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -834,8 +868,8 @@
             class="stage-card card-tilt group rounded-2xl overflow-hidden relative"
             data-aos="fade-up" data-aos-delay="200">
             <img
-              src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=870&auto=format&fit=crop"
-              alt="Etapa 3"
+              src="images/chicamocha_road/canion.webp"
+              alt="Etapa 3 - Chicamocha Canyon"
               class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy">
             <div
@@ -857,7 +891,7 @@
                     fill="url(#grad1)" opacity="0.15" />
                 </svg>
                 <div class="flex items-center gap-4 text-sm">
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -865,7 +899,7 @@
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
                     56.71 km
                   </span>
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -883,8 +917,8 @@
             class="stage-card card-tilt group rounded-2xl overflow-hidden relative"
             data-aos="fade-up" data-aos-delay="300">
             <img
-              src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=870&auto=format&fit=crop"
-              alt="Etapa 4"
+              src="images/chicamocha_road/zapatoca.webp"
+              alt="Etapa 4 - La Gran Final"
               class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy">
             <div
@@ -907,7 +941,7 @@
                     fill="url(#grad1)" opacity="0.15" />
                 </svg>
                 <div class="flex items-center gap-4 text-sm">
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -915,7 +949,7 @@
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
                     119.9 km
                   </span>
-                  <span class="flex items-center gap-1 text-white/70">
+                  <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
                       stroke="currentColor" viewBox="0 0 24 24"><path
                         stroke-linecap="round" stroke-linejoin="round"
@@ -931,7 +965,7 @@
 
         <!-- CTA -->
         <div class="text-center mt-14" data-aos="fade-up">
-          <p class="text-white/40 text-sm mb-4 font-accent"
+          <p class="text-white text-sm mb-4 font-accent"
             data-lang-es="Cupos limitados — Solo 12 ciclistas por grupo"
             data-lang-en="Limited spots — Only 12 riders per group">Cupos
             limitados — Solo 12 ciclistas por grupo</p>
@@ -993,7 +1027,7 @@
             <span data-lang-es="Nuestras Rutas"
               data-lang-en="Our Routes">Nuestras Rutas</span>
           </h2>
-          <p class="text-white/40 text-base max-w-2xl mx-auto"
+          <p class="text-white text-base max-w-2xl mx-auto"
             data-lang-es="Cuatro experiencias únicas por los paisajes más impresionantes de Colombia. Cada ruta, una aventura diferente."
             data-lang-en="Four unique experiences through Colombia's most stunning landscapes. Each route, a different adventure.">Cuatro
             experiencias únicas por los paisajes más impresionantes de Colombia.
@@ -1004,7 +1038,7 @@
         <div class="hidden md:flex items-center justify-center gap-2 mb-16"
           data-aos="fade-up" data-aos-delay="100">
           <span
-            class="text-[10px] font-accent text-white/30 tracking-wider">ENE</span>
+            class="text-[10px] font-accent text-white tracking-wider">ENE</span>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <div
             class="w-3 h-3 rounded-full bg-accent border-2 border-accent relative group cursor-pointer"
@@ -1028,7 +1062,7 @@
           </div>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <span
-            class="text-[10px] font-accent text-white/30 tracking-wider">MAY</span>
+            class="text-[10px] font-accent text-white tracking-wider">MAY</span>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <div
             class="w-3 h-3 rounded-full bg-accent border-2 border-accent relative group cursor-pointer"
@@ -1038,13 +1072,13 @@
           </div>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <span
-            class="text-[10px] font-accent text-white/30 tracking-wider">JUL</span>
+            class="text-[10px] font-accent text-white tracking-wider">JUL</span>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <span
-            class="text-[10px] font-accent text-white/30 tracking-wider">AGO</span>
+            class="text-[10px] font-accent text-white tracking-wider">AGO</span>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <span
-            class="text-[10px] font-accent text-white/30 tracking-wider">SEP</span>
+            class="text-[10px] font-accent text-white tracking-wider">SEP</span>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <div
             class="w-3 h-3 rounded-full bg-accent border-2 border-accent relative group cursor-pointer"
@@ -1054,7 +1088,7 @@
           </div>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <span
-            class="text-[10px] font-accent text-white/30 tracking-wider">NOV</span>
+            class="text-[10px] font-accent text-white tracking-wider">NOV</span>
           <div class="h-[2px] w-6 bg-white/10"></div>
           <div
             class="w-3 h-3 rounded-full bg-accent border-2 border-accent relative group cursor-pointer"
@@ -1071,11 +1105,11 @@
           <div
             class="exp-card relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] group">
             <img
-              src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=1200&auto=format&fit=crop"
+              src="images/chicamocha_road/canion.webp"
               alt="The Road to Chicamocha - Barichara"
               class="absolute inset-0 w-full h-full object-cover">
             <div
-              class="absolute inset-0 bg-gradient-to-t from-carbon/80 via-carbon/20 to-primary-dark/30"></div>
+              class="absolute inset-0  via-carbon/20 to-primary-dark/30"></div>
             <!-- Colombia map silhouette overlay -->
             <svg class="absolute bottom-4 left-4 w-24 h-32 opacity-20"
               viewBox="0 0 100 140" fill="none">
@@ -1103,60 +1137,67 @@
                 <span data-lang-es="Ruta Estrella"
                   data-lang-en="Flagship Route">Ruta Estrella</span>
               </span>
-              <span class="text-white/30 text-xs font-accent"
-                data-lang-es="Multi-día · 7 días"
-                data-lang-en="Multi-day · 7 days">Multi-día · 7 días</span>
+              <span class="text-white text-xs font-accent"
+                data-lang-es="Gravel · 6 días / 5 noches"
+                data-lang-en="Gravel · 6 days / 5 nights">Gravel · 6 días / 5 noches</span>
             </div>
             <h3
               class="font-heading text-5xl md:text-6xl text-white leading-none mb-3">The
               Road to<br><span class="text-accent">Chicamocha</span></h3>
-            <p class="text-white/50 text-lg italic mb-4 font-light"
+            <p class="text-white text-lg italic mb-4 font-light"
               data-lang-es="Explora Santander fuera del asfalto"
               data-lang-en="Explore Santander beyond the asphalt">
               "Explora Santander fuera del asfalto"
             </p>
-            <p class="text-white/60 text-sm leading-relaxed mb-6"
-              data-lang-es="La ruta insignia de Santander Cycling. Siete días pedaleando por los pueblos coloniales más bonitos de Colombia — Barichara, San Gil, Girón — hasta descender al imponente Cañón del Chicamocha, el segundo más grande del mundo. Rutas de carretera y caminos empedrados, ascensos épicos, descensos vertiginosos y la hospitalidad santandereana en cada parada. Incluye alojamiento en hoteles boutique, vehículo de soporte y guías locales."
-              data-lang-en="Santander Cycling's flagship route. Seven days riding through Colombia's most beautiful colonial towns — Barichara, San Gil, Girón — descending into the imposing Chicamocha Canyon, the second largest in the world. Road routes and cobblestone paths, epic climbs, vertiginous descents, and Santanderean hospitality at every stop. Includes boutique hotel accommodation, support vehicle, and local guides.">
-              La ruta insignia de Santander Cycling. Siete días pedaleando por
-              los pueblos coloniales más bonitos de Colombia — Barichara, San
-              Gil, Girón — hasta descender al imponente Cañón del Chicamocha, el
-              segundo más grande del mundo. Rutas de carretera y caminos
-              empedrados, ascensos épicos, descensos vertiginosos y la
-              hospitalidad santandereana en cada parada. Incluye alojamiento en
-              hoteles boutique, vehículo de soporte y guías locales.
+            <p class="text-white text-sm leading-relaxed mb-6"
+              data-lang-es="Seis días explorando Santander fuera del asfalto. Desde Bucaramanga hasta Zapatoca, pedaleando por haciendas cafeteras, cruzando el Cañón del Chicamocha en teleférico y descubriendo pueblos coloniales como Barichara."
+              data-lang-en="Six days exploring Santander off the asphalt. From Bucaramanga to Zapatoca, riding through coffee haciendas, crossing Chicamocha Canyon by cable car, and discovering colonial towns like Barichara.">
+              Seis días explorando Santander fuera del asfalto. Desde
+              Bucaramanga hasta Zapatoca, pedaleando por haciendas cafeteras,
+              cruzando el Cañón del Chicamocha en teleférico y descubriendo
+              pueblos coloniales como Barichara.
             </p>
             <!-- Stats -->
             <div class="grid grid-cols-3 gap-3 mb-6">
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-                <p class="font-accent font-bold text-xl text-accent">323 km</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="font-accent font-bold text-xl text-accent">~176 km</p>
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Distancia" data-lang-en="Distance">Distancia</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-                <p class="font-accent font-bold text-xl text-accent">8,470 m</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="font-accent font-bold text-xl text-accent">3,814 m</p>
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Desnivel" data-lang-en="Elevation">Desnivel</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-accent">4</p>
-                <p class="text-[10px] text-white/40 mt-1" data-lang-es="Etapas"
+                <p class="text-[10px] text-white mt-1" data-lang-es="Etapas"
                   data-lang-en="Stages">Etapas</p>
               </div>
             </div>
-            <a
-              href="https://wa.me/573173780637?text=Hola!%20Quiero%20información%20sobre%20The%20Road%20to%20Chicamocha"
-              class="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-carbon font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5">
-              <span data-lang-es="Reservar esta Ruta"
-                data-lang-en="Book this Route">Reservar esta Ruta</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24"><path stroke-linecap="round"
-                  stroke-linejoin="round" stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </a>
+            <div class="flex flex-wrap items-center gap-3">
+              <a
+                href="https://wa.me/573208032292?text=Hola!%20Quiero%20información%20sobre%20The%20Road%20to%20Chicamocha"
+                class="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-carbon font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5">
+                <span data-lang-es="Reservar esta Ruta"
+                  data-lang-en="Book this Route">Reservar esta Ruta</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24"><path stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </a>
+              <button onclick="openChicamochaModal()"
+                class="inline-flex items-center gap-2 border border-accent/40 hover:border-accent text-accent hover:bg-accent/10 font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5 cursor-pointer">
+                <span data-lang-es="Ver más" data-lang-en="See more">Ver más</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24"><path stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2"
+                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1175,19 +1216,19 @@
                 <span data-lang-es="Alta Montaña"
                   data-lang-en="High Altitude">Alta Montaña</span>
               </span>
-              <span class="text-white/30 text-xs font-accent"
+              <span class="text-white text-xs font-accent"
                 data-lang-es="1 — 2 días" data-lang-en="1 — 2 days">1 — 2
                 días</span>
             </div>
             <h3
               class="font-heading text-5xl md:text-6xl text-white leading-none mb-3">Páramo
               de<br><span class="text-gray-400">Santurbán</span></h3>
-            <p class="text-white/50 text-lg italic mb-4 font-light"
+            <p class="text-white text-lg italic mb-4 font-light"
               data-lang-es="Donde la aventura toca el cielo"
               data-lang-en="Where adventure touches the sky">
               "Donde la aventura toca el cielo"
             </p>
-            <p class="text-white/60 text-sm leading-relaxed mb-6"
+            <p class="text-white text-sm leading-relaxed mb-6"
               data-lang-es="Una experiencia mística en uno de los ecosistemas más únicos del planeta. Pedalea hasta los páramos de Santurbán, donde las lagunas glaciares reflejan cielos infinitos y la vegetación de frailejones te transporta a otro mundo. Una ruta exigente que te lleva por encima de los 3,500 metros de altitud, con paisajes que pocos ciclistas en el mundo tienen el privilegio de conocer. Ideal para los que buscan un reto físico y una conexión profunda con la naturaleza."
               data-lang-en="A mystical experience in one of the most unique ecosystems on the planet. Ride to the Santurbán páramos, where glacial lagoons reflect infinite skies and frailejón vegetation transports you to another world. A demanding route that takes you above 3,500 meters, with landscapes few cyclists in the world have the privilege to discover. Ideal for those seeking a physical challenge and a deep connection with nature.">
               Una experiencia mística en uno de los ecosistemas más únicos del
@@ -1204,21 +1245,21 @@
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-400">~80
                   km</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Distancia" data-lang-en="Distance">Distancia</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-400">3,500+
                   m</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Altitud Máx."
                   data-lang-en="Max Altitude">Altitud Máx.</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-400">FEB</p>
-                <p class="text-[10px] text-white/40 mt-1" data-lang-es="Fecha"
+                <p class="text-[10px] text-white mt-1" data-lang-es="Fecha"
                   data-lang-en="Date">Fecha</p>
               </div>
             </div>
@@ -1301,19 +1342,19 @@
                 <span data-lang-es="Máximo Reto"
                   data-lang-en="Ultimate Challenge">Máximo Reto</span>
               </span>
-              <span class="text-white/30 text-xs font-accent"
+              <span class="text-white text-xs font-accent"
                 data-lang-es="1 — 2 días" data-lang-en="1 — 2 days">1 — 2
                 días</span>
             </div>
             <h3
               class="font-heading text-5xl md:text-6xl text-white leading-none mb-3">Alto
               del<br><span class="text-gray-300">Sifón</span></h3>
-            <p class="text-white/50 text-lg italic mb-4 font-light"
+            <p class="text-white text-lg italic mb-4 font-light"
               data-lang-es="Donde empieza el verdadero reto"
               data-lang-en="Where the real challenge begins">
               "Donde empieza el verdadero reto"
             </p>
-            <p class="text-white/60 text-sm leading-relaxed mb-6"
+            <p class="text-white text-sm leading-relaxed mb-6"
               data-lang-es="El ascenso definitivo para ciclistas que quieren poner a prueba sus límites. El Alto del Sifón alcanza los 4,149 metros sobre el nivel del mar, una de las carreteras más altas de Colombia. Kilómetro tras kilómetro, pedaleas entre la niebla del páramo, con el aire enrarecido y el corazón acelerado. La carretera serpentea entre montañas que desaparecen en las nubes. No se trata solo de llegar a la cima — se trata de descubrir de qué estás hecho. Soporte mecánico, nutrición y vehículo acompañante durante toda la ruta."
               data-lang-en="The ultimate climb for cyclists who want to test their limits. Alto del Sifón reaches 4,149 meters above sea level, one of Colombia's highest roads. Kilometer after kilometer, you ride through páramo mist, with thin air and a racing heart. The road winds between mountains that disappear into the clouds. It's not just about reaching the summit — it's about discovering what you're made of. Mechanical support, nutrition, and escort vehicle throughout the route.">
               El ascenso definitivo para ciclistas que quieren poner a prueba
@@ -1331,14 +1372,14 @@
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-300">~90
                   km</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Distancia" data-lang-en="Distance">Distancia</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-300">4,149
                   m</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Altitud Máx."
                   data-lang-en="Max Altitude">Altitud Máx.</p>
               </div>
@@ -1346,7 +1387,7 @@
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-300">MAR ·
                   JUN</p>
-                <p class="text-[10px] text-white/40 mt-1" data-lang-es="Fechas"
+                <p class="text-[10px] text-white mt-1" data-lang-es="Fechas"
                   data-lang-en="Dates">Fechas</p>
               </div>
             </div>
@@ -1378,7 +1419,7 @@
                 <span data-lang-es="Evento Especial"
                   data-lang-en="Special Event">Evento Especial</span>
               </span>
-              <span class="text-white/30 text-xs font-accent"
+              <span class="text-white text-xs font-accent"
                 data-lang-es="Gran Fondo · Competencia"
                 data-lang-en="Gran Fondo · Competition">Gran Fondo ·
                 Competencia</span>
@@ -1386,12 +1427,12 @@
             <h3
               class="font-heading text-5xl md:text-6xl text-white leading-none mb-3">Gran
               Fondo<br><span class="text-gray-400">Nairo Quintana</span></h3>
-            <p class="text-white/50 text-lg italic mb-4 font-light"
+            <p class="text-white text-lg italic mb-4 font-light"
               data-lang-es="Calles llenas de historia, brisa y esa alegría que te impulsa seguir"
               data-lang-en="Streets full of history, breeze, and that joy that drives you forward">
               "Calles llenas de historia, brisa y esa alegría que te impulsa seguir"
             </p>
-            <p class="text-white/60 text-sm leading-relaxed mb-6"
+            <p class="text-white text-sm leading-relaxed mb-6"
               data-lang-es="Pedalea junto a la leyenda del ciclismo colombiano. El Gran Fondo Nairo Quintana es un evento único que recorre las calles históricas de Cartagena de Indias, la Ciudad Heroica. Combina la magia del ciclismo con la brisa del Caribe, pasando por la ciudad amurallada, el barrio de Bocagrande y las avenidas costeras. Una experiencia que une la pasión deportiva con la riqueza cultural de Colombia. Participantes de todo el mundo, ambiente festivo, y la energía contagiosa del Caribe colombiano."
               data-lang-en="Ride alongside the legend of Colombian cycling. The Gran Fondo Nairo Quintana is a unique event through the historic streets of Cartagena de Indias, the Heroic City. It combines the magic of cycling with the Caribbean breeze, passing through the walled city, Bocagrande neighborhood, and coastal avenues. An experience that unites sporting passion with Colombia's cultural richness. Participants from around the world, festive atmosphere, and the contagious energy of the Colombian Caribbean.">
               Pedalea junto a la leyenda del ciclismo colombiano. El Gran Fondo
@@ -1408,21 +1449,21 @@
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-400">160
                   km</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Ruta Larga" data-lang-en="Long Route">Ruta
                   Larga</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-400">80 km</p>
-                <p class="text-[10px] text-white/40 mt-1"
+                <p class="text-[10px] text-white mt-1"
                   data-lang-es="Ruta Corta" data-lang-en="Short Route">Ruta
                   Corta</p>
               </div>
               <div
                 class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
                 <p class="font-accent font-bold text-xl text-gray-400">OCT</p>
-                <p class="text-[10px] text-white/40 mt-1" data-lang-es="Fecha"
+                <p class="text-[10px] text-white mt-1" data-lang-es="Fecha"
                   data-lang-en="Date">Fecha</p>
               </div>
             </div>
@@ -1466,7 +1507,7 @@
                   stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2"
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
-              <p class="font-accent text-white/70 text-xs">Cartagena de
+              <p class="font-accent text-white text-xs">Cartagena de
                 Indias</p>
             </div>
           </div>
@@ -1485,7 +1526,7 @@
                 data-lang-es="¿No encontraste tu fecha ideal?"
                 data-lang-en="Didn't find your ideal date?">¿No encontraste tu
                 fecha ideal?</p>
-              <p class="text-white/40 text-xs"
+              <p class="text-white text-xs"
                 data-lang-es="Diseñamos rutas personalizadas para grupos privados"
                 data-lang-en="We design custom routes for private groups">Diseñamos
                 rutas personalizadas para grupos privados</p>
@@ -1575,7 +1616,7 @@
                 data-lang-en="4 Stages.<br>323 Kilometers.<br>An Unforgettable Journey.">4
                 Etapas.<br>323 Kilómetros.<br>Un Viaje Inolvidable.</span>
             </h2>
-            <p class="text-white/50 text-base leading-relaxed mb-8"
+            <p class="text-white text-base leading-relaxed mb-8"
               data-lang-es="Desde las alturas de Bucaramanga hasta las profundidades del Cañón del Chicamocha. Cada etapa revela un paisaje diferente, un reto distinto, una emoción nueva. Descensos vertiginosos, ascensos épicos y carreteras que serpentean entre montañas que quitan el aliento."
               data-lang-en="From the heights of Bucaramanga to the depths of Chicamocha Canyon. Each stage reveals a different landscape, a distinct challenge, a new emotion. Vertiginous descents, epic climbs, and roads that wind through breathtaking mountains.">
               Desde las alturas de Bucaramanga hasta las profundidades del Cañón
@@ -1589,26 +1630,26 @@
             <div class="grid grid-cols-2 gap-4">
               <div class="bg-white/5 rounded-xl p-5 border border-white/5">
                 <p class="font-accent font-bold text-2xl text-accent">323 km</p>
-                <p class="text-xs text-white/40 mt-1"
+                <p class="text-xs text-white mt-1"
                   data-lang-es="Distancia Total"
                   data-lang-en="Total Distance">Distancia Total</p>
               </div>
               <div class="bg-white/5 rounded-xl p-5 border border-white/5">
                 <p class="font-accent font-bold text-2xl text-accent">8,470
                   m</p>
-                <p class="text-xs text-white/40 mt-1"
+                <p class="text-xs text-white mt-1"
                   data-lang-es="Desnivel Acumulado"
                   data-lang-en="Total Elevation">Desnivel Acumulado</p>
               </div>
               <div class="bg-white/5 rounded-xl p-5 border border-white/5">
                 <p class="font-accent font-bold text-2xl text-accent">7</p>
-                <p class="text-xs text-white/40 mt-1"
+                <p class="text-xs text-white mt-1"
                   data-lang-es="Días de Aventura"
                   data-lang-en="Days of Adventure">Días de Aventura</p>
               </div>
               <div class="bg-white/5 rounded-xl p-5 border border-white/5">
                 <p class="font-accent font-bold text-2xl text-accent">12</p>
-                <p class="text-xs text-white/40 mt-1"
+                <p class="text-xs text-white mt-1"
                   data-lang-es="Cupos Máximo" data-lang-en="Max Riders">Cupos
                   Máximo</p>
               </div>
@@ -1710,7 +1751,7 @@
       class="lightbox fixed inset-0 z-[90] bg-carbon/95 backdrop-blur-xl flex items-center justify-center p-4"
       onclick="closeLightbox()">
       <button
-        class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors"
+        class="absolute top-6 right-6 text-white hover:text-white transition-colors"
         onclick="closeLightbox()">
         <svg class="w-8 h-8" fill="none" stroke="currentColor"
           viewBox="0 0 24 24"><path stroke-linecap="round"
@@ -1719,6 +1760,291 @@
       </button>
       <img id="lightbox-img" src alt="Gallery image"
         class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+    </div>
+
+    <!-- ====== CHICAMOCHA MODAL ====== -->
+    <div id="chicamocha-modal"
+      class="chicamocha-modal fixed inset-0 z-[100] bg-carbon/95 backdrop-blur-2xl flex items-start justify-center overflow-y-auto">
+
+      <!-- Close button -->
+      <button onclick="closeChicamochaModal()"
+        class="fixed top-6 right-6 z-[101] text-white hover:text-white transition-colors bg-carbon/60 backdrop-blur-sm rounded-full p-2">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24"><path stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+
+      <div class="modal-content w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <span
+            class="inline-flex items-center gap-1.5 bg-accent/10 border border-accent/20 text-accent text-xs font-accent font-semibold px-3 py-1 rounded-full mb-4">
+            <svg class="w-3 h-3" fill="currentColor"
+              viewBox="0 0 24 24"><path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+            <span data-lang-es="Ruta Estrella" data-lang-en="Flagship Route">Ruta Estrella</span>
+          </span>
+          <h2 class="font-heading text-5xl md:text-7xl text-white leading-none mb-3">The Road to<br><span class="text-accent">Chicamocha</span></h2>
+          <p class="text-white text-sm font-accent" data-lang-es="Gravel · 6 días / 5 noches" data-lang-en="Gravel · 6 days / 5 nights">Gravel · 6 días / 5 noches</p>
+        </div>
+
+        <!-- Gallery -->
+        <div class="mb-12">
+          <!-- Main image -->
+          <div class="relative rounded-2xl overflow-hidden h-[300px] md:h-[480px] mb-3 bg-black/40">
+            <img id="modal-gallery-main"
+              src="images/chicamocha_road/canion.webp"
+              alt="The Road to Chicamocha"
+              class="modal-gallery-img w-full h-full object-contain">
+            <!-- Nav arrows -->
+            <button onclick="modalGalleryPrev()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button onclick="modalGalleryNext()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <!-- Counter -->
+            <div class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
+              <span id="modal-gallery-counter">1 / 8</span>
+            </div>
+          </div>
+          <!-- Thumbnails -->
+          <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <button onclick="setModalImage(0)" class="gallery-thumb active-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/canion.webp" alt="Cañón del Chicamocha" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(1)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/barichara.webp" alt="Barichara" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(2)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/landscape.webp" alt="Paisaje Santander" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(3)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/puente.webp" alt="Puente" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(4)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/coffe.webp" alt="Hacienda cafetera" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(5)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/canion2.webp" alt="Cañón del Chicamocha vista" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(6)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/barichara2.webp" alt="Barichara pueblo" class="w-full h-full object-cover">
+            </button>
+            <button onclick="setModalImage(7)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/zapatoca.webp" alt="Zapatoca" class="w-full h-full object-cover">
+            </button>
+          </div>
+        </div>
+
+        <!-- Two column info -->
+        <div class="grid md:grid-cols-2 gap-10 mb-12">
+
+          <!-- Left: Description -->
+          <div>
+            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Sobre la Ruta" data-lang-en="About the Route">Sobre la Ruta</h3>
+            <p class="text-white text-sm leading-relaxed mb-4"
+              data-lang-es="The Road to Chicamocha es una travesía gravel de 6 días y 5 noches por el corazón de Santander. Desde Bucaramanga hasta Zapatoca, recorremos ~176 km fuera del asfalto con ~3.814 m de desnivel acumulado a través de 4 etapas diseñadas para descubrir lo mejor de la región."
+              data-lang-en="The Road to Chicamocha is a 6-day, 5-night gravel journey through the heart of Santander. From Bucaramanga to Zapatoca, we ride ~176 km off the asphalt with ~3,814 m of elevation gain across 4 stages designed to discover the best of the region.">
+              The Road to Chicamocha es una travesía gravel de 6 días y 5 noches por el corazón de Santander. Desde Bucaramanga hasta Zapatoca, recorremos ~176 km fuera del asfalto con ~3.814 m de desnivel acumulado a través de 4 etapas diseñadas para descubrir lo mejor de la región.
+            </p>
+            <p class="text-white text-sm leading-relaxed mb-4"
+              data-lang-es="Pedalea por haciendas cafeteras reconocidas mundialmente, desciende al Río Chicamocha para disfrutar de piscinas naturales y rafting opcional (dificultad 4/5), cruza el cañón en teleférico hasta Las Juntas y explora pueblos coloniales como Barichara y Guane."
+              data-lang-en="Ride through world-renowned coffee haciendas, descend to the Chicamocha River for natural pools and optional rafting (difficulty 4/5), cross the canyon by cable car to Las Juntas, and explore colonial towns like Barichara and Guane.">
+              Pedalea por haciendas cafeteras reconocidas mundialmente, desciende al Río Chicamocha para disfrutar de piscinas naturales y rafting opcional (dificultad 4/5), cruza el cañón en teleférico hasta Las Juntas y explora pueblos coloniales como Barichara y Guane.
+            </p>
+            <p class="text-white text-sm leading-relaxed"
+              data-lang-es="La aventura culmina con un ascenso épico de casi 1.900 m de desnivel desde Barichara hasta Zapatoca, atravesando los pueblos de Galán y La Fuente. Incluye alojamiento en hoteles boutique, desayunos, guía acompañante, asistencia mecánica y jersey Santander Cycling."
+              data-lang-en="The adventure culminates with an epic climb of nearly 1,900 m elevation from Barichara to Zapatoca, through the towns of Galán and La Fuente. Includes boutique hotel accommodation, breakfasts, guide, mechanical assistance, and Santander Cycling jersey.">
+              La aventura culmina con un ascenso épico de casi 1.900 m de desnivel desde Barichara hasta Zapatoca, atravesando los pueblos de Galán y La Fuente. Incluye alojamiento en hoteles boutique, desayunos, guía acompañante, asistencia mecánica y jersey Santander Cycling.
+            </p>
+          </div>
+
+          <!-- Right: Itinerary -->
+          <div>
+            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Itinerario" data-lang-en="Itinerary">Itinerario</h3>
+            <div class="space-y-3">
+              <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-1">
+                  <p class="text-accent font-accent font-bold text-sm">Día 1</p>
+                  <p class="text-white text-xs font-accent" data-lang-es="Bienvenida" data-lang-en="Welcome">Bienvenida</p>
+                </div>
+                <p class="text-white text-xs" data-lang-es="Llegada a Bucaramanga. Alistamiento de bicicleta en bike shop, city tour y traslado al hotel en Mesa de Los Santos." data-lang-en="Arrival in Bucaramanga. Bike setup at bike shop, city tour, and transfer to hotel in Mesa de Los Santos.">Llegada a Bucaramanga. Alistamiento de bicicleta en bike shop, city tour y traslado al hotel en Mesa de Los Santos.</p>
+              </div>
+              <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-1">
+                  <p class="text-accent font-accent font-bold text-sm">Día 2 — Stage 1</p>
+                  <p class="text-white text-xs font-accent">32.33 km · 562 m↑</p>
+                </div>
+                <p class="text-white text-xs" data-lang-es="La Mesa de Los Santos. Mirador Salto del Duende, bosque de pinos y hacienda cafetera El Roble." data-lang-en="Mesa de Los Santos. Salto del Duende viewpoint, pine forest, and El Roble coffee hacienda.">La Mesa de Los Santos. Mirador Salto del Duende, bosque de pinos y hacienda cafetera El Roble.</p>
+              </div>
+              <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-1">
+                  <p class="text-accent font-accent font-bold text-sm">Día 3 — Stage 2</p>
+                  <p class="text-white text-xs font-accent">40.58 km · 495 m↑</p>
+                </div>
+                <p class="text-white text-xs" data-lang-es="Mesa de Los Santos → Jordán → Barichara. Descenso al Río Chicamocha, piscinas naturales, teleférico a Las Juntas. Rafting opcional (4/5)." data-lang-en="Mesa de Los Santos → Jordán → Barichara. Descent to Chicamocha River, natural pools, cable car to Las Juntas. Optional rafting (4/5).">Mesa de Los Santos → Jordán → Barichara. Descenso al Río Chicamocha, piscinas naturales, teleférico a Las Juntas. Rafting opcional (4/5).</p>
+              </div>
+              <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-1">
+                  <p class="text-accent font-accent font-bold text-sm">Día 4 — Stage 3</p>
+                  <p class="text-white text-xs font-accent">35.65 km · 872 m↑</p>
+                </div>
+                <p class="text-white text-xs" data-lang-es="Barichara. Talleres de piedra, pueblo colonial, descenso a Guane para picnic y actividad especial." data-lang-en="Barichara. Stone workshops, colonial town, descent to Guane for picnic and special activity.">Barichara. Talleres de piedra, pueblo colonial, descenso a Guane para picnic y actividad especial.</p>
+              </div>
+              <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-1">
+                  <p class="text-accent font-accent font-bold text-sm">Día 5 — Stage 4</p>
+                  <p class="text-white text-xs font-accent">68.07 km · 1,885 m↑</p>
+                </div>
+                <p class="text-white text-xs" data-lang-es="Barichara → Galán → La Fuente → Zapatoca. Ascenso épico con 1.885 m de desnivel. El día más exigente del tour." data-lang-en="Barichara → Galán → La Fuente → Zapatoca. Epic climb with 1,885 m elevation. The most demanding day.">Barichara → Galán → La Fuente → Zapatoca. Ascenso épico con 1.885 m de desnivel. El día más exigente del tour.</p>
+              </div>
+              <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-1">
+                  <p class="text-accent font-accent font-bold text-sm">Día 6</p>
+                  <p class="text-white text-xs font-accent" data-lang-es="Fin del tour" data-lang-en="End of tour">Fin del tour</p>
+                </div>
+                <p class="text-white text-xs" data-lang-es="Zapatoca → Aeropuerto BGA. Desayuno incluido y traslado al aeropuerto. ¡Hasta la próxima aventura!" data-lang-en="Zapatoca → BGA Airport. Breakfast included and airport transfer. Until the next adventure!">Zapatoca → Aeropuerto BGA. Desayuno incluido y traslado al aeropuerto. ¡Hasta la próxima aventura!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats expanded -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12">
+          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+            <p class="font-accent font-bold text-2xl text-gray-300">~176 km</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Distancia Total" data-lang-en="Total Distance">Distancia Total</p>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+            <p class="font-accent font-bold text-2xl text-gray-300">3,814 m</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Desnivel Acumulado" data-lang-en="Elevation Gain">Desnivel Acumulado</p>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+            <p class="font-accent font-bold text-2xl text-gray-300">4</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Etapas" data-lang-en="Stages">Etapas</p>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+            <p class="font-accent font-bold text-2xl text-gray-300">6</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Días" data-lang-en="Days">Días</p>
+          </div>
+          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+            <p class="font-accent font-bold text-2xl text-gray-300">5</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Noches" data-lang-en="Nights">Noches</p>
+          </div>
+        </div>
+
+        <!-- Qué incluye / No incluye -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div>
+            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Qué Incluye" data-lang-en="What's Included">Qué Incluye</h3>
+            <ul class="space-y-2.5">
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Alojamiento en hoteles boutique (5 noches)" data-lang-en="Boutique hotel accommodation (5 nights)">Alojamiento en hoteles boutique (5 noches)</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Traslados desde/hacia Aeropuerto BGA" data-lang-en="Transfers from/to BGA Airport">Traslados desde/hacia Aeropuerto BGA</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Transporte durante todo el tour" data-lang-en="Transport throughout the tour">Transporte durante todo el tour</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Desayunos incluidos" data-lang-en="Breakfasts included">Desayunos incluidos</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Seguro de viaje" data-lang-en="Travel insurance">Seguro de viaje</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Guía acompañante en ruta" data-lang-en="Accompanying route guide">Guía acompañante en ruta</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Asistencia mecánica" data-lang-en="Mechanical assistance">Asistencia mecánica</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Kit de viaje ciclista" data-lang-en="Cyclist travel kit">Kit de viaje ciclista</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span data-lang-es="Jersey Santander Cycling" data-lang-en="Santander Cycling Jersey">Jersey Santander Cycling</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="No Incluye" data-lang-en="Not Included">No Incluye</h3>
+            <ul class="space-y-2.5">
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span data-lang-es="Almuerzos y cenas" data-lang-en="Lunches and dinners">Almuerzos y cenas</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span data-lang-es="Propinas" data-lang-en="Tips">Propinas</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span data-lang-es="Gastos personales" data-lang-en="Personal expenses">Gastos personales</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span data-lang-es="Tiquetes aéreos" data-lang-en="Airline tickets">Tiquetes aéreos</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span data-lang-es="Bebidas alcohólicas" data-lang-en="Alcoholic beverages">Bebidas alcohólicas</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-white text-sm">
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span data-lang-es="Alquiler de bicicleta" data-lang-en="Bicycle rental">Alquiler de bicicleta</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Hotels -->
+        <div class="mb-12">
+          <h3 class="font-heading text-2xl text-white mb-2 text-center" data-lang-es="Hoteles" data-lang-en="Hotels">Hoteles</h3>
+          <p class="text-white text-xs text-center mb-4 font-accent" data-lang-es="Sujetos a cambios por el operador" data-lang-en="Subject to change by the operator">Sujetos a cambios por el operador</p>
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-white text-sm font-semibold mb-1">Hotel Barí</p>
+              <p class="text-white text-xs">Bucaramanga</p>
+              <p class="text-accent/60 text-[10px] mt-1 font-accent">@hotelbaribucaramanga</p>
+            </div>
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-white text-sm font-semibold mb-1">Hotel Mesa de Los Santos</p>
+              <p class="text-white text-xs">Mesa de Los Santos</p>
+              <p class="text-accent/60 text-[10px] mt-1 font-accent">@hotelmesadelossantosoficial</p>
+            </div>
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-white text-sm font-semibold mb-1">Finca Buenos Aires</p>
+              <p class="text-white text-xs">Barichara</p>
+              <p class="text-accent/60 text-[10px] mt-1 font-accent">@hotelfincabuenosaires</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center">
+          <a
+            href="https://wa.me/573208032292?text=Hola!%20Quiero%20reservar%20The%20Road%20to%20Chicamocha"
+            class="inline-flex items-center gap-3 bg-accent hover:bg-accent-light text-carbon font-bold px-8 py-4 rounded-full text-base transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.661-6.085-1.797l-.427-.268-2.825.946.946-2.825-.268-.427A9.957 9.957 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+            <span data-lang-es="Reservar The Road to Chicamocha" data-lang-en="Book The Road to Chicamocha">Reservar The Road to Chicamocha</span>
+          </a>
+          <p class="text-white text-xs mt-4" data-lang-es="info@santandercycling.com · WhatsApp: +57 320 8032292" data-lang-en="info@santandercycling.com · WhatsApp: +57 320 8032292">info@santandercycling.com · WhatsApp: +57 320 8032292</p>
+        </div>
+
+      </div>
     </div>
 
     <!-- ============================================ -->
@@ -1768,7 +2094,7 @@
                 viewBox="0 0 24 24"><path
                   d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
             </div>
-            <p class="text-white/70 text-sm leading-relaxed mb-6"
+            <p class="text-white text-sm leading-relaxed mb-6"
               data-lang-es="Una experiencia increíble. Las rutas son espectaculares, el equipo es súper profesional y la organización impecable. Chicamocha desde la bicicleta es otra cosa. ¡Volveré!"
               data-lang-en="An incredible experience. The routes are spectacular, the team is super professional, and the organization is impeccable. Chicamocha from a bicycle is something else. I'll be back!">
               "Una experiencia increíble. Las rutas son espectaculares, el equipo es súper profesional y la organización impecable. Chicamocha desde la bicicleta es otra cosa. ¡Volveré!"
@@ -1778,7 +2104,7 @@
                 class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-white font-bold text-lg">M</div>
               <div>
                 <p class="text-white font-medium text-sm">Marco R.</p>
-                <p class="text-white/40 text-xs flex items-center gap-1">🇨🇴
+                <p class="text-white text-xs flex items-center gap-1">🇨🇴
                   Bogotá, Colombia</p>
               </div>
             </div>
@@ -1804,7 +2130,7 @@
                 viewBox="0 0 24 24"><path
                   d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
             </div>
-            <p class="text-white/70 text-sm leading-relaxed mb-6"
+            <p class="text-white text-sm leading-relaxed mb-6"
               data-lang-es="I came from the US and this was the best cycling trip I've ever done. The roads, the scenery, the food — everything was perfect. The Chicamocha descent is absolutely mind-blowing."
               data-lang-en="I came from the US and this was the best cycling trip I've ever done. The roads, the scenery, the food — everything was perfect. The Chicamocha descent is absolutely mind-blowing.">
               "I came from the US and this was the best cycling trip I've ever done. The roads, the scenery, the food — everything was perfect. The Chicamocha descent is absolutely mind-blowing."
@@ -1814,7 +2140,7 @@
                 class="w-12 h-12 rounded-full bg-gray-600/20 flex items-center justify-center text-accent font-bold text-lg">J</div>
               <div>
                 <p class="text-white font-medium text-sm">James T.</p>
-                <p class="text-white/40 text-xs flex items-center gap-1">🇺🇸
+                <p class="text-white text-xs flex items-center gap-1">🇺🇸
                   Austin, Texas</p>
               </div>
             </div>
@@ -1840,7 +2166,7 @@
                 viewBox="0 0 24 24"><path
                   d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
             </div>
-            <p class="text-white/70 text-sm leading-relaxed mb-6"
+            <p class="text-white text-sm leading-relaxed mb-6"
               data-lang-es="Lo mejor de Colombia sobre dos ruedas. Los guías conocen cada curva, cada parada para tomar agua y cada mirador secreto. El soporte logístico es de primer nivel. 100% recomendado."
               data-lang-en="The best of Colombia on two wheels. The guides know every curve, every water stop, and every secret viewpoint. Logistical support is top-notch. 100% recommended.">
               "Lo mejor de Colombia sobre dos ruedas. Los guías conocen cada curva, cada parada para tomar agua y cada mirador secreto. El soporte logístico es de primer nivel. 100% recomendado."
@@ -1850,7 +2176,7 @@
                 class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">L</div>
               <div>
                 <p class="text-white font-medium text-sm">Laura C.</p>
-                <p class="text-white/40 text-xs flex items-center gap-1">🇨🇴
+                <p class="text-white text-xs flex items-center gap-1">🇨🇴
                   Medellín, Colombia</p>
               </div>
             </div>
@@ -1865,7 +2191,7 @@
     <section class="py-16 md:py-20 bg-cloud">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
         <p
-          class="font-accent text-sm tracking-[0.3em] uppercase text-white/40 mb-10"
+          class="font-accent text-sm tracking-[0.3em] uppercase text-white mb-10"
           data-lang-es="Aliados & Patrocinadores"
           data-lang-en="Partners & Sponsors">Aliados & Patrocinadores</p>
         <div
@@ -2031,7 +2357,7 @@
           <span data-lang-es="Recibe la Ruta"
             data-lang-en="Get the Route">Recibe la Ruta</span>
         </h2>
-        <p class="text-xl text-white/60 mb-10" data-aos="fade-up"
+        <p class="text-xl text-white mb-10" data-aos="fade-up"
           data-aos-delay="100">
           <span
             data-lang-es="Únete a nuestra comunidad y recibe rutas exclusivas, descuentos y las últimas novedades."
@@ -2052,7 +2378,7 @@
               data-lang-en="Subscribe">Suscribirse</span>
           </button>
         </form>
-        <p class="text-xs text-white/30 mt-4"
+        <p class="text-xs text-white mt-4"
           data-lang-es="Sin spam. Solo aventura. Cancela cuando quieras."
           data-lang-en="No spam. Just adventure. Unsubscribe anytime.">Sin spam.
           Solo aventura. Cancela cuando quieras.</p>
@@ -2081,11 +2407,11 @@
                 <span
                   class="block font-heading text-xl tracking-wider leading-none text-white">SANTANDER</span>
                 <span
-                  class="block text-[9px] tracking-[0.25em] text-white/40 font-accent uppercase">Cycling
+                  class="block text-[9px] tracking-[0.25em] text-white font-accent uppercase">Cycling
                   & Experiences</span>
               </div>
             </a>
-            <p class="text-white/40 text-sm leading-relaxed"
+            <p class="text-white text-sm leading-relaxed"
               data-lang-es="Tours en bicicleta por las rutas más espectaculares de Santander, Colombia. Experiencias únicas sobre dos ruedas."
               data-lang-en="Cycling tours through the most spectacular routes in Santander, Colombia. Unique experiences on two wheels.">
               Tours en bicicleta por las rutas más espectaculares de Santander,
@@ -2100,19 +2426,19 @@
               Rápidos</h4>
             <ul class="space-y-3">
               <li><a href="#about"
-                  class="text-white/40 hover:text-accent text-sm transition-colors"
+                  class="text-white hover:text-accent text-sm transition-colors"
                   data-lang-es="Nosotros"
                   data-lang-en="About Us">Nosotros</a></li>
               <li><a href="#chicamocha"
-                  class="text-white/40 hover:text-accent text-sm transition-colors"
+                  class="text-white hover:text-accent text-sm transition-colors"
                   data-lang-es="La Ruta" data-lang-en="The Route">La
                   Ruta</a></li>
               <li><a href="#experiences"
-                  class="text-white/40 hover:text-accent text-sm transition-colors"
+                  class="text-white hover:text-accent text-sm transition-colors"
                   data-lang-es="Experiencias"
                   data-lang-en="Experiences">Experiencias</a></li>
               <li><a href="#gallery"
-                  class="text-white/40 hover:text-accent text-sm transition-colors"
+                  class="text-white hover:text-accent text-sm transition-colors"
                   data-lang-es="Galería" data-lang-en="Gallery">Galería</a></li>
             </ul>
           </div>
@@ -2124,7 +2450,7 @@
             <ul class="space-y-3">
               <li>
                 <a href="https://wa.me/573173780637"
-                  class="flex items-center gap-3 text-white/40 hover:text-accent text-sm transition-colors">
+                  class="flex items-center gap-3 text-white hover:text-accent text-sm transition-colors">
                   <svg class="w-5 h-5 flex-shrink-0" fill="currentColor"
                     viewBox="0 0 24 24"><path
                       d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
@@ -2133,7 +2459,7 @@
               </li>
               <li>
                 <a href="mailto:info@santandercycling.com"
-                  class="flex items-center gap-3 text-white/40 hover:text-accent text-sm transition-colors">
+                  class="flex items-center gap-3 text-white hover:text-accent text-sm transition-colors">
                   <svg class="w-5 h-5 flex-shrink-0" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24"><path
                       stroke-linecap="round" stroke-linejoin="round"
@@ -2143,7 +2469,7 @@
                 </a>
               </li>
               <li>
-                <span class="flex items-center gap-3 text-white/40 text-sm">
+                <span class="flex items-center gap-3 text-white text-sm">
                   <svg class="w-5 h-5 flex-shrink-0" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24"><path
                       stroke-linecap="round" stroke-linejoin="round"
@@ -2165,26 +2491,26 @@
             <div class="flex gap-4">
               <a href="https://www.instagram.com/santandercycling/"
                 target="_blank"
-                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white/40 hover:text-accent transition-all duration-300">
+                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white hover:text-accent transition-all duration-300">
                 <svg class="w-5 h-5" fill="currentColor"
                   viewBox="0 0 24 24"><path
                     d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
               </a>
               <a href="#"
-                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white/40 hover:text-accent transition-all duration-300">
+                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white hover:text-accent transition-all duration-300">
                 <svg class="w-5 h-5" fill="currentColor"
                   viewBox="0 0 24 24"><path
                     d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
               </a>
               <a href="#"
-                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white/40 hover:text-accent transition-all duration-300">
+                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white hover:text-accent transition-all duration-300">
                 <!-- Strava icon -->
                 <svg class="w-5 h-5" fill="currentColor"
                   viewBox="0 0 24 24"><path
                     d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" /></svg>
               </a>
               <a href="#"
-                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white/40 hover:text-accent transition-all duration-300">
+                class="w-11 h-11 rounded-full bg-white/5 hover:bg-gray-600/20 flex items-center justify-center text-white hover:text-accent transition-all duration-300">
                 <svg class="w-5 h-5" fill="currentColor"
                   viewBox="0 0 24 24"><path
                     d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
@@ -2194,9 +2520,9 @@
             <!-- Strava widget -->
             <div class="mt-8 p-4 rounded-xl bg-white/5 border border-white/5">
               <p
-                class="text-xs text-white/30 font-accent uppercase tracking-wider mb-2">Strava
+                class="text-xs text-white font-accent uppercase tracking-wider mb-2">Strava
                 Club</p>
-              <p class="text-white/60 text-sm font-medium">Santander Cycling</p>
+              <p class="text-white text-sm font-medium">Santander Cycling</p>
               <p class="text-accent text-xs mt-1"
                 data-lang-es="Únete a nuestro club"
                 data-lang-en="Join our club">Únete a nuestro club →</p>
@@ -2207,17 +2533,17 @@
         <!-- Bottom bar -->
         <div
           class="flex flex-col md:flex-row items-center justify-between pt-8 gap-4">
-          <p class="text-white/30 text-xs">&copy; 2026 Santander Cycling &
+          <p class="text-white text-xs">&copy; 2026 Santander Cycling &
             Experiences. <span data-lang-es="Todos los derechos reservados."
               data-lang-en="All rights reserved.">Todos los derechos
               reservados.</span></p>
           <div class="flex items-center gap-6">
             <a href="#"
-              class="text-white/30 hover:text-white/60 text-xs transition-colors"
+              class="text-white hover:text-white text-xs transition-colors"
               data-lang-es="Política de Privacidad"
               data-lang-en="Privacy Policy">Política de Privacidad</a>
             <a href="#"
-              class="text-white/30 hover:text-white/60 text-xs transition-colors"
+              class="text-white hover:text-white text-xs transition-colors"
               data-lang-es="Términos y Condiciones"
               data-lang-en="Terms & Conditions">Términos y Condiciones</a>
           </div>
@@ -2464,18 +2790,7 @@
       }
     });
 
-    // Stage cards stagger
-    gsap.from('.stage-card', {
-      y: 60,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '#chicamocha .grid',
-        start: 'top 85%',
-      }
-    });
+
 
     // ==============================
     // LIGHTBOX
@@ -2496,8 +2811,76 @@
       document.body.style.overflow = '';
     }
 
+    // ==============================
+    // CHICAMOCHA MODAL + GALLERY
+    // ==============================
+    const modalGalleryImages = [
+      'images/chicamocha_road/canion.webp',
+      'images/chicamocha_road/barichara.webp',
+      'images/chicamocha_road/landscape.webp',
+      'images/chicamocha_road/puente.webp',
+      'images/chicamocha_road/coffe.webp',
+      'images/chicamocha_road/canion2.webp',
+      'images/chicamocha_road/barichara2.webp',
+      'images/chicamocha_road/zapatoca.webp',
+    ];
+    let modalCurrentIndex = 0;
+
+    function openChicamochaModal() {
+      const modal = document.getElementById('chicamocha-modal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setModalImage(0);
+      // re-apply current language
+      const lang = localStorage.getItem('lang') || 'es';
+      setLang(lang);
+    }
+
+    function closeChicamochaModal() {
+      const modal = document.getElementById('chicamocha-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function setModalImage(index) {
+      modalCurrentIndex = index;
+      const mainImg = document.getElementById('modal-gallery-main');
+      const counter = document.getElementById('modal-gallery-counter');
+      mainImg.src = modalGalleryImages[index];
+      counter.textContent = `${index + 1} / ${modalGalleryImages.length}`;
+      // Update thumbnails
+      document.querySelectorAll('#chicamocha-modal .gallery-thumb').forEach((thumb, i) => {
+        if (i === index) {
+          thumb.classList.add('active-thumb');
+        } else {
+          thumb.classList.remove('active-thumb');
+        }
+      });
+    }
+
+    function modalGalleryNext() {
+      const next = (modalCurrentIndex + 1) % modalGalleryImages.length;
+      setModalImage(next);
+    }
+
+    function modalGalleryPrev() {
+      const prev = (modalCurrentIndex - 1 + modalGalleryImages.length) % modalGalleryImages.length;
+      setModalImage(prev);
+    }
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') {
+        const chicModal = document.getElementById('chicamocha-modal');
+        if (chicModal.classList.contains('active')) {
+          closeChicamochaModal();
+        } else {
+          closeLightbox();
+        }
+      }
+      if (document.getElementById('chicamocha-modal').classList.contains('active')) {
+        if (e.key === 'ArrowRight') modalGalleryNext();
+        if (e.key === 'ArrowLeft') modalGalleryPrev();
+      }
     });
 
     // ==============================
