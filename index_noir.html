@@ -353,6 +353,64 @@
       background: rgba(153, 153, 153, 0.1);
       border: 1px solid rgba(153, 153, 153, 0.3);
     }
+
+
+    /*
+preloader
+    */
+    .logo-loader {
+      width: 160px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-loader svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .logo-loader .path {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 90;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      stroke-miterlimit: 20;
+      animation-duration: 1s, 1s;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1), ease-in-out;
+      animation-delay: 0.1s, 0.1s;
+      animation-iteration-count: infinite, infinite;
+    }
+
+    .path.m1 { animation-name: logo-draw-m1, logo-fade; }
+    .path.m2 { animation-name: logo-draw-m2, logo-fade; }
+    .path.m3 { animation-name: logo-draw-m3, logo-fade; }
+
+    @keyframes logo-draw-m1 {
+      0%   { stroke-dashoffset: var(--len1, 1400); }
+      60%  { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes logo-draw-m2 {
+      0%   { stroke-dashoffset: var(--len2, 1800); }
+      60%  { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes logo-draw-m3 {
+      0%   { stroke-dashoffset: var(--len3, 1400); }
+      60%  { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes logo-fade {
+      0%   { opacity: 1; }
+      60%  { opacity: 1; }
+      85%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
   </style>
   </head>
 
@@ -361,22 +419,39 @@
     <!-- ============================================ -->
     <!-- PRELOADER -->
     <!-- ============================================ -->
-    <div id="preloader"
+      <div id="preloader"
+      class="fixed inset-0 z-[100] bg-carbon flex items-center justify-center">
+    <div class="logo-loader">
+   <svg id="logo-svg" viewBox="0 0 1400 880" xmlns="http://www.w3.org/2000/svg">
+      <!-- Montaña izquierda: la pata derecha para en la intersección con m2 -->
+      <polyline id="m1" class="path m1"
+        points="10,880 288,232 476,588" />
+      <!-- Montaña centro (la más alta) -->
+      <polyline id="m2" class="path m2"
+        points="360,880 700,24 1040,880" />
+      <!-- Montaña derecha: la pata izquierda para en la intersección con m2 -->
+      <polyline id="m3" class="path m3"
+        points="924,588 1112,232 1390,880" />
+    </svg>
+    </div>
+    </div>
+
+    <!-- <div id="preloader"
       class="fixed inset-0 z-[100] bg-carbon flex items-center justify-center">
       <div class="text-center">
         <svg class="w-20 h-20 mx-auto mb-4" viewBox="0 0 120 80" fill="none">
           <path d="M10 70 L35 15 L60 70" stroke="#999999" stroke-width="3.5"
             stroke-linecap="round" stroke-linejoin="round"
-            style="stroke-dasharray:200;stroke-dashoffset:200;animation:draw 1.5s ease-out 0.2s forwards" />
+            style="stroke-dasharray:200;stroke-dashoffset:200;animation:draw 1s ease-out 0.2s forwards" />
           <path d="M35 25 L60 70 L85 15 L110 70" stroke="#444444"
             stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
-            style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1.5s ease-out 0.5s forwards" />
+            style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1s ease-out 0.5s forwards" />
         </svg>
         <p
           class="font-heading text-xl tracking-[0.3em] text-white uppercase">Santander</p>
       </div>
       <style>@keyframes draw{to{stroke-dashoffset:0}}</style>
-    </div>
+    </div> -->
 
     <!-- ============================================ -->
     <!-- NAVIGATION -->
@@ -387,10 +462,11 @@
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <!-- Logo -->
         <a href="#hero" class="flex items-center gap-3 group">
-          <div class="hidden sm:block">
-            <img src="images/Imagotipo_Horizontal_White.png"
-              alt="Santander Cycling"
-              class="w-48 h-auto transition-opacity group-hover:opacity-90">
+          <div class="hidden sm:flex items-center gap-3">
+            <img src="images/isotipo_White2.png" alt="Santander Cycling"
+              class="w-16 h-auto transition-opacity group-hover:opacity-90">
+            <img src="images/Logotipo_White2.png" alt="Santander Cycling"
+              class="w-64 h-16 transition-opacity group-hover:opacity-90">
           </div>
         </a>
 
@@ -491,16 +567,10 @@
       <!-- Content -->
       <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <!-- Animated Mountain Logo -->
-      <img src="images/Imagotipo_White.png" alt="Santander Cycling"
-          class="w-48 h-auto mx-auto mb-6 mountain-draw">
-
-        <h1
-          class="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-wide leading-none mb-2">
-          <span class="text-white">SANTANDER</span>
-        </h1>
-        <p
-          class="font-accent text-sm sm:text-base tracking-[0.4em] text-accent mb-8 uppercase">Cycling
-          & Experiences</p>
+        <img src="images/Isotipo_White2.png" alt="Santander Cycling"
+          class="w-48 h-32 mx-auto mb-6 mountain-draw">
+        <img src="images/Logotipo_White2.png" alt="Santander Cycling slogan"
+          class="w-96 h-32 mx-auto mb-6 mountain-draw">
 
         <p
           class="text-xl sm:text-2xl md:text-3xl font-light text-white mb-4 italic">
@@ -1166,7 +1236,8 @@
               class="absolute top-6 right-6 bg-carbon/80 backdrop-blur-sm border border-accent/30 rounded-xl px-4 py-3 text-center">
               <p
                 class="text-accent font-accent font-bold text-xs tracking-wider"
-                data-lang-es="ABR · JUN · DIC" data-lang-en="APR · JUN · DEC">ABR
+                data-lang-es="ABR · JUN · DIC"
+                data-lang-en="APR · JUN · DEC">ABR
                 · JUN · DIC</p>
             </div>
           </div>
@@ -1184,7 +1255,8 @@
               </span>
               <span class="text-white text-xs font-accent"
                 data-lang-es="Gravel · 6 días / 5 noches"
-                data-lang-en="Gravel · 6 days / 5 nights">Gravel · 6 días / 5 noches</span>
+                data-lang-en="Gravel · 6 days / 5 nights">Gravel · 6 días / 5
+                noches</span>
             </div>
             <h3
               class="font-heading text-5xl md:text-6xl text-white leading-none mb-3">The
@@ -1236,7 +1308,8 @@
               </a>
               <button onclick="openChicamochaModal()"
                 class="inline-flex items-center gap-2 border border-accent/40 hover:border-accent text-accent hover:bg-accent/10 font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5 cursor-pointer">
-                <span data-lang-es="Ver más" data-lang-en="See more">Ver más</span>
+                <span data-lang-es="Ver más" data-lang-en="See more">Ver
+                  más</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor"
                   viewBox="0 0 24 24"><path stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2"
@@ -1372,7 +1445,8 @@
             <div
               class="absolute bottom-6 right-6 bg-carbon/80 backdrop-blur-sm border border-accent/30 rounded-xl px-4 py-2">
               <p class="font-accent font-bold text-accent text-sm"
-                data-lang-es="4,149 m.s.n.m." data-lang-en="4,149 m.a.s.l.">4,149
+                data-lang-es="4,149 m.s.n.m."
+                data-lang-en="4,149 m.a.s.l.">4,149
                 m.s.n.m.</p>
             </div>
           </div>
@@ -1527,7 +1601,8 @@
               </a>
               <button onclick="openCartagenaModal()"
                 class="inline-flex items-center gap-2 border border-gray-500/40 hover:border-gray-400 text-gray-400 hover:bg-gray-500/10 font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5 cursor-pointer">
-                <span data-lang-es="Ver más" data-lang-en="See more">Ver más</span>
+                <span data-lang-es="Ver más" data-lang-en="See more">Ver
+                  más</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor"
                   viewBox="0 0 24 24"><path stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2"
@@ -1737,68 +1812,118 @@
 
         <!-- Gallery Grid -->
         <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-          <div class="gallery-item col-span-2 row-span-2 cursor-pointer"
-            data-aos="fade-up" data-aos-delay="0" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1571188654248-7a89213915f7?q=80&w=1200&auto=format&fit=crop"
-              alt="Canyon road cycling"
-              class="w-full h-full object-cover rounded-xl" loading="lazy">
+          class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="0" onclick="openLightbox(this)">
+            <img src="images/chicamocha_road/canion.webp"
+              alt="Cañón del Chicamocha"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="50" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=600&auto=format&fit=crop"
-              alt="Mountain cycling"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/ciclistas/2.webp" alt="Ciclistas Santander"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="100" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=600&auto=format&fit=crop"
-              alt="Cycling group"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/chicamocha_road/barichara.webp" alt="Barichara"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="150" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?q=80&w=600&auto=format&fit=crop"
-              alt="Road through mountains"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/ciclistas/3.webp" alt="Ciclistas en ruta"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="200" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?q=80&w=600&auto=format&fit=crop"
-              alt="Cyclist on bridge"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/chicamocha_road/landscape.webp"
+              alt="Paisaje Santander"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="250" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=600&auto=format&fit=crop"
-              alt="Epic descent"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/ciclistas/4.webp" alt="Ciclistas aventura"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="300" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=600&auto=format&fit=crop"
-              alt="Mountain sunrise"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/chicamocha_road/puente.webp"
+              alt="Puente Chicamocha"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
           <div class="gallery-item cursor-pointer" data-aos="fade-up"
             data-aos-delay="350" onclick="openLightbox(this)">
-            <img
-              src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=600&auto=format&fit=crop"
-              alt="Cycling adventure"
-              class="w-full h-48 md:h-56 object-cover rounded-xl"
+            <img src="images/ciclistas/5.webp" alt="Ciclistas Colombia"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="400" onclick="openLightbox(this)">
+            <img src="images/chicamocha_road/coffe.webp" alt="Hacienda cafetera"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="450" onclick="openLightbox(this)">
+            <img src="images/ciclistas/6.webp" alt="Ciclistas Cartagena"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="500" onclick="openLightbox(this)">
+            <img src="images/chicamocha_road/canion2.webp"
+              alt="Cañón del Chicamocha vista"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="550" onclick="openLightbox(this)">
+            <img src="images/ciclistas/7.webp" alt="Ciclistas experiencia"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="600" onclick="openLightbox(this)">
+            <img src="images/chicamocha_road/barichara2.webp"
+              alt="Barichara pueblo"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="650" onclick="openLightbox(this)">
+            <img src="images/ciclistas/8.webp" alt="Ciclistas ruta"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="700" onclick="openLightbox(this)">
+            <img src="images/chicamocha_road/zapatoca.webp" alt="Zapatoca"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="750" onclick="openLightbox(this)">
+            <img src="images/ciclistas/9.webp" alt="Ciclistas tour"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="800" onclick="openLightbox(this)">
+            <img src="images/ciclistas/10.webp" alt="Ciclistas Gran Fondo"
+              class="w-full aspect-square object-cover rounded-xl"
+              loading="lazy">
+          </div>
+          <div class="gallery-item cursor-pointer" data-aos="fade-up"
+            data-aos-delay="850" onclick="openLightbox(this)">
+            <img src="images/ciclistas/11.webp" alt="Ciclistas Nairo Quintana"
+              class="w-full aspect-square object-cover rounded-xl"
               loading="lazy">
           </div>
         </div>
@@ -1834,7 +1959,8 @@
             d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
 
-      <div class="modal-content w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+      <div
+        class="modal-content w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
 
         <!-- Header -->
         <div class="text-center mb-12">
@@ -1843,57 +1969,90 @@
             <svg class="w-3 h-3" fill="currentColor"
               viewBox="0 0 24 24"><path
                 d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-            <span data-lang-es="Ruta Estrella" data-lang-en="Flagship Route">Ruta Estrella</span>
+            <span data-lang-es="Ruta Estrella"
+              data-lang-en="Flagship Route">Ruta Estrella</span>
           </span>
-          <h2 class="font-heading text-5xl md:text-7xl text-white leading-none mb-3">The Road to<br><span class="text-accent">Chicamocha</span></h2>
-          <p class="text-white text-sm font-accent" data-lang-es="Gravel · 6 días / 5 noches" data-lang-en="Gravel · 6 days / 5 nights">Gravel · 6 días / 5 noches</p>
+          <h2
+            class="font-heading text-5xl md:text-7xl text-white leading-none mb-3">The
+            Road to<br><span class="text-accent">Chicamocha</span></h2>
+          <p class="text-white text-sm font-accent"
+            data-lang-es="Gravel · 6 días / 5 noches"
+            data-lang-en="Gravel · 6 days / 5 nights">Gravel · 6 días / 5
+            noches</p>
         </div>
 
         <!-- Gallery -->
         <div class="mb-12">
           <!-- Main image -->
-          <div class="relative rounded-2xl overflow-hidden h-[300px] md:h-[480px] mb-3 bg-black/40">
+          <div
+            class="relative rounded-2xl overflow-hidden h-[300px] md:h-[480px] mb-3 bg-black/40">
             <img id="modal-gallery-main"
               src="images/chicamocha_road/canion.webp"
               alt="The Road to Chicamocha"
               class="modal-gallery-img w-full h-full object-contain">
             <!-- Nav arrows -->
-            <button onclick="modalGalleryPrev()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <button onclick="modalGalleryPrev()"
+              class="absolute left-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24"><path stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="2"
+                  d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <button onclick="modalGalleryNext()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <button onclick="modalGalleryNext()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24"><path stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="2"
+                  d="M9 5l7 7-7 7" /></svg>
             </button>
             <!-- Counter -->
-            <div class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
+            <div
+              class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
               <span id="modal-gallery-counter">1 / 8</span>
             </div>
           </div>
           <!-- Thumbnails -->
           <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            <button onclick="setModalImage(0)" class="gallery-thumb active-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/canion.webp" alt="Cañón del Chicamocha" class="w-full h-full object-cover">
+            <button onclick="setModalImage(0)"
+              class="gallery-thumb active-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/canion.webp"
+                alt="Cañón del Chicamocha" class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(1)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/barichara.webp" alt="Barichara" class="w-full h-full object-cover">
+            <button onclick="setModalImage(1)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/barichara.webp" alt="Barichara"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(2)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/landscape.webp" alt="Paisaje Santander" class="w-full h-full object-cover">
+            <button onclick="setModalImage(2)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/landscape.webp"
+                alt="Paisaje Santander" class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(3)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/puente.webp" alt="Puente" class="w-full h-full object-cover">
+            <button onclick="setModalImage(3)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/puente.webp" alt="Puente"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(4)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/coffe.webp" alt="Hacienda cafetera" class="w-full h-full object-cover">
+            <button onclick="setModalImage(4)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/coffe.webp"
+                alt="Hacienda cafetera" class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(5)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/canion2.webp" alt="Cañón del Chicamocha vista" class="w-full h-full object-cover">
+            <button onclick="setModalImage(5)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/canion2.webp"
+                alt="Cañón del Chicamocha vista"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(6)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/barichara2.webp" alt="Barichara pueblo" class="w-full h-full object-cover">
+            <button onclick="setModalImage(6)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/barichara2.webp"
+                alt="Barichara pueblo" class="w-full h-full object-cover">
             </button>
-            <button onclick="setModalImage(7)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/chicamocha_road/zapatoca.webp" alt="Zapatoca" class="w-full h-full object-cover">
+            <button onclick="setModalImage(7)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/chicamocha_road/zapatoca.webp" alt="Zapatoca"
+                class="w-full h-full object-cover">
             </button>
           </div>
         </div>
@@ -1903,69 +2062,127 @@
 
           <!-- Left: Description -->
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Sobre la Ruta" data-lang-en="About the Route">Sobre la Ruta</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="Sobre la Ruta" data-lang-en="About the Route">Sobre
+              la Ruta</h3>
             <p class="text-white text-sm leading-relaxed mb-4"
               data-lang-es="The Road to Chicamocha es una travesía gravel de 6 días y 5 noches por el corazón de Santander. Desde Bucaramanga hasta Zapatoca, recorremos ~176 km fuera del asfalto con ~3.814 m de desnivel acumulado a través de 4 etapas diseñadas para descubrir lo mejor de la región."
               data-lang-en="The Road to Chicamocha is a 6-day, 5-night gravel journey through the heart of Santander. From Bucaramanga to Zapatoca, we ride ~176 km off the asphalt with ~3,814 m of elevation gain across 4 stages designed to discover the best of the region.">
-              The Road to Chicamocha es una travesía gravel de 6 días y 5 noches por el corazón de Santander. Desde Bucaramanga hasta Zapatoca, recorremos ~176 km fuera del asfalto con ~3.814 m de desnivel acumulado a través de 4 etapas diseñadas para descubrir lo mejor de la región.
+              The Road to Chicamocha es una travesía gravel de 6 días y 5 noches
+              por el corazón de Santander. Desde Bucaramanga hasta Zapatoca,
+              recorremos ~176 km fuera del asfalto con ~3.814 m de desnivel
+              acumulado a través de 4 etapas diseñadas para descubrir lo mejor
+              de la región.
             </p>
             <p class="text-white text-sm leading-relaxed mb-4"
               data-lang-es="Pedalea por haciendas cafeteras reconocidas mundialmente, desciende al Río Chicamocha para disfrutar de piscinas naturales y rafting opcional (dificultad 4/5), cruza el cañón en teleférico hasta Las Juntas y explora pueblos coloniales como Barichara y Guane."
               data-lang-en="Ride through world-renowned coffee haciendas, descend to the Chicamocha River for natural pools and optional rafting (difficulty 4/5), cross the canyon by cable car to Las Juntas, and explore colonial towns like Barichara and Guane.">
-              Pedalea por haciendas cafeteras reconocidas mundialmente, desciende al Río Chicamocha para disfrutar de piscinas naturales y rafting opcional (dificultad 4/5), cruza el cañón en teleférico hasta Las Juntas y explora pueblos coloniales como Barichara y Guane.
+              Pedalea por haciendas cafeteras reconocidas mundialmente,
+              desciende al Río Chicamocha para disfrutar de piscinas naturales y
+              rafting opcional (dificultad 4/5), cruza el cañón en teleférico
+              hasta Las Juntas y explora pueblos coloniales como Barichara y
+              Guane.
             </p>
             <p class="text-white text-sm leading-relaxed"
               data-lang-es="La aventura culmina con un ascenso épico de casi 1.900 m de desnivel desde Barichara hasta Zapatoca, atravesando los pueblos de Galán y La Fuente. Incluye alojamiento en hoteles boutique, desayunos, guía acompañante, asistencia mecánica y jersey Santander Cycling."
               data-lang-en="The adventure culminates with an epic climb of nearly 1,900 m elevation from Barichara to Zapatoca, through the towns of Galán and La Fuente. Includes boutique hotel accommodation, breakfasts, guide, mechanical assistance, and Santander Cycling jersey.">
-              La aventura culmina con un ascenso épico de casi 1.900 m de desnivel desde Barichara hasta Zapatoca, atravesando los pueblos de Galán y La Fuente. Incluye alojamiento en hoteles boutique, desayunos, guía acompañante, asistencia mecánica y jersey Santander Cycling.
+              La aventura culmina con un ascenso épico de casi 1.900 m de
+              desnivel desde Barichara hasta Zapatoca, atravesando los pueblos
+              de Galán y La Fuente. Incluye alojamiento en hoteles boutique,
+              desayunos, guía acompañante, asistencia mecánica y jersey
+              Santander Cycling.
             </p>
           </div>
 
           <!-- Right: Itinerary -->
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Itinerario" data-lang-en="Itinerary">Itinerario</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="Itinerario" data-lang-en="Itinerary">Itinerario</h3>
             <div class="space-y-3">
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-accent font-accent font-bold text-sm" data-lang-es="Día 1" data-lang-en="Day 1">Día 1</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Bienvenida" data-lang-en="Welcome">Bienvenida</p>
+                  <p class="text-accent font-accent font-bold text-sm"
+                    data-lang-es="Día 1" data-lang-en="Day 1">Día 1</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Bienvenida"
+                    data-lang-en="Welcome">Bienvenida</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Llegada a Bucaramanga. Alistamiento de bicicleta en bike shop, city tour y traslado al hotel en Mesa de Los Santos." data-lang-en="Arrival in Bucaramanga. Bike setup at bike shop, city tour, and transfer to hotel in Mesa de Los Santos.">Llegada a Bucaramanga. Alistamiento de bicicleta en bike shop, city tour y traslado al hotel en Mesa de Los Santos.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Llegada a Bucaramanga. Alistamiento de bicicleta en bike shop, city tour y traslado al hotel en Mesa de Los Santos."
+                  data-lang-en="Arrival in Bucaramanga. Bike setup at bike shop, city tour, and transfer to hotel in Mesa de Los Santos.">Llegada
+                  a Bucaramanga. Alistamiento de bicicleta en bike shop, city
+                  tour y traslado al hotel en Mesa de Los Santos.</p>
               </div>
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-accent font-accent font-bold text-sm" data-lang-es="Día 2 — Etapa 1" data-lang-en="Day 2 — Stage 1">Día 2 — Etapa 1</p>
-                  <p class="text-white text-xs font-accent">32.33 km · 562 m↑</p>
+                  <p class="text-accent font-accent font-bold text-sm"
+                    data-lang-es="Día 2 — Etapa 1"
+                    data-lang-en="Day 2 — Stage 1">Día 2 — Etapa 1</p>
+                  <p class="text-white text-xs font-accent">32.33 km · 562
+                    m↑</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="La Mesa de Los Santos. Mirador Salto del Duende, bosque de pinos y hacienda cafetera El Roble." data-lang-en="Mesa de Los Santos. Salto del Duende viewpoint, pine forest, and El Roble coffee hacienda.">La Mesa de Los Santos. Mirador Salto del Duende, bosque de pinos y hacienda cafetera El Roble.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="La Mesa de Los Santos. Mirador Salto del Duende, bosque de pinos y hacienda cafetera El Roble."
+                  data-lang-en="Mesa de Los Santos. Salto del Duende viewpoint, pine forest, and El Roble coffee hacienda.">La
+                  Mesa de Los Santos. Mirador Salto del Duende, bosque de pinos
+                  y hacienda cafetera El Roble.</p>
               </div>
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-accent font-accent font-bold text-sm" data-lang-es="Día 3 — Etapa 2" data-lang-en="Day 3 — Stage 2">Día 3 — Etapa 2</p>
-                  <p class="text-white text-xs font-accent">40.58 km · 495 m↑</p>
+                  <p class="text-accent font-accent font-bold text-sm"
+                    data-lang-es="Día 3 — Etapa 2"
+                    data-lang-en="Day 3 — Stage 2">Día 3 — Etapa 2</p>
+                  <p class="text-white text-xs font-accent">40.58 km · 495
+                    m↑</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Mesa de Los Santos → Jordán → Barichara. Descenso al Río Chicamocha, piscinas naturales, teleférico a Las Juntas. Rafting opcional (4/5)." data-lang-en="Mesa de Los Santos → Jordán → Barichara. Descent to Chicamocha River, natural pools, cable car to Las Juntas. Optional rafting (4/5).">Mesa de Los Santos → Jordán → Barichara. Descenso al Río Chicamocha, piscinas naturales, teleférico a Las Juntas. Rafting opcional (4/5).</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Mesa de Los Santos → Jordán → Barichara. Descenso al Río Chicamocha, piscinas naturales, teleférico a Las Juntas. Rafting opcional (4/5)."
+                  data-lang-en="Mesa de Los Santos → Jordán → Barichara. Descent to Chicamocha River, natural pools, cable car to Las Juntas. Optional rafting (4/5).">Mesa
+                  de Los Santos → Jordán → Barichara. Descenso al Río
+                  Chicamocha, piscinas naturales, teleférico a Las Juntas.
+                  Rafting opcional (4/5).</p>
               </div>
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-accent font-accent font-bold text-sm" data-lang-es="Día 4 — Etapa 3" data-lang-en="Day 4 — Stage 3">Día 4 — Etapa 3</p>
-                  <p class="text-white text-xs font-accent">35.65 km · 872 m↑</p>
+                  <p class="text-accent font-accent font-bold text-sm"
+                    data-lang-es="Día 4 — Etapa 3"
+                    data-lang-en="Day 4 — Stage 3">Día 4 — Etapa 3</p>
+                  <p class="text-white text-xs font-accent">35.65 km · 872
+                    m↑</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Barichara. Talleres de piedra, pueblo colonial, descenso a Guane para picnic y actividad especial." data-lang-en="Barichara. Stone workshops, colonial town, descent to Guane for picnic and special activity.">Barichara. Talleres de piedra, pueblo colonial, descenso a Guane para picnic y actividad especial.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Barichara. Talleres de piedra, pueblo colonial, descenso a Guane para picnic y actividad especial."
+                  data-lang-en="Barichara. Stone workshops, colonial town, descent to Guane for picnic and special activity.">Barichara.
+                  Talleres de piedra, pueblo colonial, descenso a Guane para
+                  picnic y actividad especial.</p>
               </div>
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-accent font-accent font-bold text-sm" data-lang-es="Día 5 — Etapa 4" data-lang-en="Day 5 — Stage 4">Día 5 — Etapa 4</p>
-                  <p class="text-white text-xs font-accent">68.07 km · 1,885 m↑</p>
+                  <p class="text-accent font-accent font-bold text-sm"
+                    data-lang-es="Día 5 — Etapa 4"
+                    data-lang-en="Day 5 — Stage 4">Día 5 — Etapa 4</p>
+                  <p class="text-white text-xs font-accent">68.07 km · 1,885
+                    m↑</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Barichara → Galán → La Fuente → Zapatoca. Ascenso épico con 1.885 m de desnivel. El día más exigente del tour." data-lang-en="Barichara → Galán → La Fuente → Zapatoca. Epic climb with 1,885 m elevation. The most demanding day.">Barichara → Galán → La Fuente → Zapatoca. Ascenso épico con 1.885 m de desnivel. El día más exigente del tour.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Barichara → Galán → La Fuente → Zapatoca. Ascenso épico con 1.885 m de desnivel. El día más exigente del tour."
+                  data-lang-en="Barichara → Galán → La Fuente → Zapatoca. Epic climb with 1,885 m elevation. The most demanding day.">Barichara
+                  → Galán → La Fuente → Zapatoca. Ascenso épico con 1.885 m de
+                  desnivel. El día más exigente del tour.</p>
               </div>
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-accent font-accent font-bold text-sm" data-lang-es="Día 6" data-lang-en="Day 6">Día 6</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Fin del tour" data-lang-en="End of tour">Fin del tour</p>
+                  <p class="text-accent font-accent font-bold text-sm"
+                    data-lang-es="Día 6" data-lang-en="Day 6">Día 6</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Fin del tour" data-lang-en="End of tour">Fin
+                    del tour</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Zapatoca → Aeropuerto BGA. Desayuno incluido y traslado al aeropuerto. ¡Hasta la próxima aventura!" data-lang-en="Zapatoca → BGA Airport. Breakfast included and airport transfer. Until the next adventure!">Zapatoca → Aeropuerto BGA. Desayuno incluido y traslado al aeropuerto. ¡Hasta la próxima aventura!</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Zapatoca → Aeropuerto BGA. Desayuno incluido y traslado al aeropuerto. ¡Hasta la próxima aventura!"
+                  data-lang-en="Zapatoca → BGA Airport. Breakfast included and airport transfer. Until the next adventure!">Zapatoca
+                  → Aeropuerto BGA. Desayuno incluido y traslado al aeropuerto.
+                  ¡Hasta la próxima aventura!</p>
               </div>
             </div>
           </div>
@@ -1973,97 +2190,164 @@
 
         <!-- Stats expanded -->
         <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12">
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">~176 km</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Distancia Total" data-lang-en="Total Distance">Distancia Total</p>
+            <p class="text-[11px] text-white mt-1"
+              data-lang-es="Distancia Total"
+              data-lang-en="Total Distance">Distancia Total</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">3,814 m</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Desnivel Acumulado" data-lang-en="Elevation Gain">Desnivel Acumulado</p>
+            <p class="text-[11px] text-white mt-1"
+              data-lang-es="Desnivel Acumulado"
+              data-lang-en="Elevation Gain">Desnivel Acumulado</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">4</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Etapas" data-lang-en="Stages">Etapas</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Etapas"
+              data-lang-en="Stages">Etapas</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">6</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Días" data-lang-en="Days">Días</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Días"
+              data-lang-en="Days">Días</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">5</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Noches" data-lang-en="Nights">Noches</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Noches"
+              data-lang-en="Nights">Noches</p>
           </div>
         </div>
 
         <!-- Qué incluye / No incluye -->
         <div class="grid md:grid-cols-2 gap-8 mb-12">
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Qué Incluye" data-lang-en="What's Included">Qué Incluye</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="Qué Incluye" data-lang-en="What's Included">Qué
+              Incluye</h3>
             <ul class="space-y-2.5">
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Alojamiento en hoteles boutique (5 noches)" data-lang-en="Boutique hotel accommodation (5 nights)">Alojamiento en hoteles boutique (5 noches)</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Alojamiento en hoteles boutique (5 noches)"
+                  data-lang-en="Boutique hotel accommodation (5 nights)">Alojamiento
+                  en hoteles boutique (5 noches)</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Traslados desde/hacia Aeropuerto BGA" data-lang-en="Transfers from/to BGA Airport">Traslados desde/hacia Aeropuerto BGA</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Traslados desde/hacia Aeropuerto BGA"
+                  data-lang-en="Transfers from/to BGA Airport">Traslados
+                  desde/hacia Aeropuerto BGA</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Transporte durante todo el tour" data-lang-en="Transport throughout the tour">Transporte durante todo el tour</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Transporte durante todo el tour"
+                  data-lang-en="Transport throughout the tour">Transporte
+                  durante todo el tour</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Desayunos incluidos" data-lang-en="Breakfasts included">Desayunos incluidos</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Desayunos incluidos"
+                  data-lang-en="Breakfasts included">Desayunos incluidos</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Seguro de viaje" data-lang-en="Travel insurance">Seguro de viaje</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Seguro de viaje"
+                  data-lang-en="Travel insurance">Seguro de viaje</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Guía acompañante en ruta" data-lang-en="Accompanying route guide">Guía acompañante en ruta</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Guía acompañante en ruta"
+                  data-lang-en="Accompanying route guide">Guía acompañante en
+                  ruta</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Asistencia mecánica" data-lang-en="Mechanical assistance">Asistencia mecánica</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Asistencia mecánica"
+                  data-lang-en="Mechanical assistance">Asistencia
+                  mecánica</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Kit de viaje ciclista" data-lang-en="Cyclist travel kit">Kit de viaje ciclista</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Kit de viaje ciclista"
+                  data-lang-en="Cyclist travel kit">Kit de viaje ciclista</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Jersey Santander Cycling" data-lang-en="Santander Cycling Jersey">Jersey Santander Cycling</span>
+                <svg class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Jersey Santander Cycling"
+                  data-lang-en="Santander Cycling Jersey">Jersey Santander
+                  Cycling</span>
               </li>
             </ul>
           </div>
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="No Incluye" data-lang-en="Not Included">No Incluye</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="No Incluye" data-lang-en="Not Included">No
+              Incluye</h3>
             <ul class="space-y-2.5">
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Almuerzos y cenas" data-lang-en="Lunches and dinners">Almuerzos y cenas</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Almuerzos y cenas"
+                  data-lang-en="Lunches and dinners">Almuerzos y cenas</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Propinas" data-lang-en="Tips">Propinas</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Propinas"
+                  data-lang-en="Tips">Propinas</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Gastos personales" data-lang-en="Personal expenses">Gastos personales</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Gastos personales"
+                  data-lang-en="Personal expenses">Gastos personales</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Tiquetes aéreos" data-lang-en="Airline tickets">Tiquetes aéreos</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Tiquetes aéreos"
+                  data-lang-en="Airline tickets">Tiquetes aéreos</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Bebidas alcohólicas" data-lang-en="Alcoholic beverages">Bebidas alcohólicas</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Bebidas alcohólicas"
+                  data-lang-en="Alcoholic beverages">Bebidas alcohólicas</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Alquiler de bicicleta" data-lang-en="Bicycle rental">Alquiler de bicicleta</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Alquiler de bicicleta"
+                  data-lang-en="Bicycle rental">Alquiler de bicicleta</span>
               </li>
             </ul>
           </div>
@@ -2071,23 +2355,35 @@
 
         <!-- Hotels -->
         <div class="mb-12">
-          <h3 class="font-heading text-2xl text-white mb-2 text-center" data-lang-es="Hoteles" data-lang-en="Hotels">Hoteles</h3>
-          <p class="text-white text-xs text-center mb-4 font-accent" data-lang-es="Sujetos a cambios por el operador" data-lang-en="Subject to change by the operator">Sujetos a cambios por el operador</p>
+          <h3 class="font-heading text-2xl text-white mb-2 text-center"
+            data-lang-es="Hoteles" data-lang-en="Hotels">Hoteles</h3>
+          <p class="text-white text-xs text-center mb-4 font-accent"
+            data-lang-es="Sujetos a cambios por el operador"
+            data-lang-en="Subject to change by the operator">Sujetos a cambios
+            por el operador</p>
           <div class="grid sm:grid-cols-3 gap-3">
-            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+            <div
+              class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
               <p class="text-white text-sm font-semibold mb-1">Hotel Barí</p>
               <p class="text-white text-xs">Bucaramanga</p>
-              <p class="text-accent/60 text-[10px] mt-1 font-accent">@hotelbaribucaramanga</p>
+              <p
+                class="text-accent/60 text-[10px] mt-1 font-accent">@hotelbaribucaramanga</p>
             </div>
-            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-              <p class="text-white text-sm font-semibold mb-1">Hotel Mesa de Los Santos</p>
+            <div
+              class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-white text-sm font-semibold mb-1">Hotel Mesa de Los
+                Santos</p>
               <p class="text-white text-xs">Mesa de Los Santos</p>
-              <p class="text-accent/60 text-[10px] mt-1 font-accent">@hotelmesadelossantosoficial</p>
+              <p
+                class="text-accent/60 text-[10px] mt-1 font-accent">@hotelmesadelossantosoficial</p>
             </div>
-            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-              <p class="text-white text-sm font-semibold mb-1">Finca Buenos Aires</p>
+            <div
+              class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+              <p class="text-white text-sm font-semibold mb-1">Finca Buenos
+                Aires</p>
               <p class="text-white text-xs">Barichara</p>
-              <p class="text-accent/60 text-[10px] mt-1 font-accent">@hotelfincabuenosaires</p>
+              <p
+                class="text-accent/60 text-[10px] mt-1 font-accent">@hotelfincabuenosaires</p>
             </div>
           </div>
         </div>
@@ -2097,10 +2393,17 @@
           <a
             href="https://wa.me/573208032292?text=Hola!%20Quiero%20reservar%20The%20Road%20to%20Chicamocha"
             class="inline-flex items-center gap-3 bg-accent hover:bg-accent-light text-carbon font-bold px-8 py-4 rounded-full text-base transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.661-6.085-1.797l-.427-.268-2.825.946.946-2.825-.268-.427A9.957 9.957 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-            <span data-lang-es="Reservar The Road to Chicamocha" data-lang-en="Book The Road to Chicamocha">Reservar The Road to Chicamocha</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.661-6.085-1.797l-.427-.268-2.825.946.946-2.825-.268-.427A9.957 9.957 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" /></svg>
+            <span data-lang-es="Reservar The Road to Chicamocha"
+              data-lang-en="Book The Road to Chicamocha">Reservar The Road to
+              Chicamocha</span>
           </a>
-          <p class="text-white text-xs mt-4" data-lang-es="info@santandercycling.com · WhatsApp: +57 320 8032292" data-lang-en="info@santandercycling.com · WhatsApp: +57 320 8032292">info@santandercycling.com · WhatsApp: +57 320 8032292</p>
+          <p class="text-white text-xs mt-4"
+            data-lang-es="info@santandercycling.com · WhatsApp: +57 320 8032292"
+            data-lang-en="info@santandercycling.com · WhatsApp: +57 320 8032292">info@santandercycling.com
+            · WhatsApp: +57 320 8032292</p>
         </div>
 
       </div>
@@ -2119,7 +2422,8 @@
             d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
 
-      <div class="modal-content w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+      <div
+        class="modal-content w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
 
         <!-- Header -->
         <div class="text-center mb-12">
@@ -2129,63 +2433,99 @@
               viewBox="0 0 24 24"><path stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="2"
                 d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-            <span data-lang-es="Evento Especial" data-lang-en="Special Event">Evento Especial</span>
+            <span data-lang-es="Evento Especial"
+              data-lang-en="Special Event">Evento Especial</span>
           </span>
-          <h2 class="font-heading text-5xl md:text-7xl text-white leading-none mb-3">Gran Fondo<br><span class="text-gray-400">Nairo Quintana</span></h2>
-          <p class="text-white text-sm font-accent" data-lang-es="8 días / 7 noches · Cartagena de Indias" data-lang-en="8 days / 7 nights · Cartagena de Indias">8 días / 7 noches · Cartagena de Indias</p>
+          <h2
+            class="font-heading text-5xl md:text-7xl text-white leading-none mb-3">Gran
+            Fondo<br><span class="text-gray-400">Nairo Quintana</span></h2>
+          <p class="text-white text-sm font-accent"
+            data-lang-es="8 días / 7 noches · Cartagena de Indias"
+            data-lang-en="8 days / 7 nights · Cartagena de Indias">8 días / 7
+            noches · Cartagena de Indias</p>
         </div>
 
         <!-- Gallery -->
         <div class="mb-12">
           <!-- Main image -->
-          <div class="relative rounded-2xl overflow-hidden h-[300px] md:h-[480px] mb-3 bg-black/40">
+          <div
+            class="relative rounded-2xl overflow-hidden h-[300px] md:h-[480px] mb-3 bg-black/40">
             <img id="cartagena-gallery-main"
               src="images/ciclistas/2.webp"
               alt="Gran Fondo Nairo Quintana - Cartagena"
               class="modal-gallery-img w-full h-full object-contain">
             <!-- Nav arrows -->
-            <button onclick="cartagenaGalleryPrev()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <button onclick="cartagenaGalleryPrev()"
+              class="absolute left-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24"><path stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="2"
+                  d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <button onclick="cartagenaGalleryNext()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <button onclick="cartagenaGalleryNext()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white hover:text-white rounded-full p-2 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24"><path stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="2"
+                  d="M9 5l7 7-7 7" /></svg>
             </button>
             <!-- Counter -->
-            <div class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
+            <div
+              class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
               <span id="cartagena-gallery-counter">1 / 10</span>
             </div>
           </div>
           <!-- Thumbnails -->
           <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            <button onclick="setCartagenaImage(0)" class="gallery-thumb active-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/2.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(0)"
+              class="gallery-thumb active-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/2.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(1)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/3.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(1)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/3.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(2)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/4.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(2)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/4.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(3)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/5.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(3)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/5.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(4)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/6.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(4)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/6.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(5)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/7.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(5)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/7.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(6)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/8.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(6)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/8.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(7)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/9.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(7)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/9.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(8)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/10.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(8)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/10.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(9)" class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/11.webp" alt="Ciclistas Cartagena" class="w-full h-full object-cover">
+            <button onclick="setCartagenaImage(9)"
+              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
+              <img src="images/ciclistas/11.webp" alt="Ciclistas Cartagena"
+                class="w-full h-full object-cover">
             </button>
           </div>
         </div>
@@ -2195,91 +2535,167 @@
 
           <!-- Left: Description -->
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Sobre el Tour" data-lang-en="About the Tour">Sobre el Tour</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="Sobre el Tour" data-lang-en="About the Tour">Sobre
+              el Tour</h3>
             <p class="text-white text-sm leading-relaxed mb-4"
               data-lang-es="The Fantastic — Color, History & Caribbean Soul es una experiencia de 8 días y 7 noches en Cartagena de Indias, una de las ciudades más icónicas del Caribe colombiano. Este tour combina la pasión por el ciclismo con la riqueza cultural, la historia colonial y las playas de ensueño de la Costa Caribe."
               data-lang-en="The Fantastic — Color, History & Caribbean Soul is an 8-day, 7-night experience in Cartagena de Indias, one of the most iconic cities in the Colombian Caribbean. This tour combines the passion for cycling with the cultural richness, colonial history, and dream beaches of the Caribbean Coast.">
-              The Fantastic — Color, History & Caribbean Soul es una experiencia de 8 días y 7 noches en Cartagena de Indias, una de las ciudades más icónicas del Caribe colombiano. Este tour combina la pasión por el ciclismo con la riqueza cultural, la historia colonial y las playas de ensueño de la Costa Caribe.
+              The Fantastic — Color, History & Caribbean Soul es una experiencia
+              de 8 días y 7 noches en Cartagena de Indias, una de las ciudades
+              más icónicas del Caribe colombiano. Este tour combina la pasión
+              por el ciclismo con la riqueza cultural, la historia colonial y
+              las playas de ensueño de la Costa Caribe.
             </p>
             <p class="text-white text-sm leading-relaxed mb-4"
               data-lang-es="Explora la Ciudad Amurallada, el Castillo de San Felipe de Barajas, las Islas del Rosario y Playa Barú. Disfruta de rodadas costeras, cabalgatas a orillas del mar, un tour por la bahía al atardecer con cena a bordo, y la energía del barrio Getsemaní. Un viaje que combina aventura, descanso y gastronomía caribeña."
               data-lang-en="Explore the Walled City, the Castillo de San Felipe de Barajas, the Rosario Islands, and Barú Beach. Enjoy coastal rides, horseback riding along the shore, a bay tour at sunset with dinner on board, and the energy of the Getsemaní neighborhood. A journey that combines adventure, relaxation, and Caribbean cuisine.">
-              Explora la Ciudad Amurallada, el Castillo de San Felipe de Barajas, las Islas del Rosario y Playa Barú. Disfruta de rodadas costeras, cabalgatas a orillas del mar, un tour por la bahía al atardecer con cena a bordo, y la energía del barrio Getsemaní. Un viaje que combina aventura, descanso y gastronomía caribeña.
+              Explora la Ciudad Amurallada, el Castillo de San Felipe de
+              Barajas, las Islas del Rosario y Playa Barú. Disfruta de rodadas
+              costeras, cabalgatas a orillas del mar, un tour por la bahía al
+              atardecer con cena a bordo, y la energía del barrio Getsemaní. Un
+              viaje que combina aventura, descanso y gastronomía caribeña.
             </p>
             <p class="text-white text-sm leading-relaxed"
               data-lang-es="El evento central es el Gran Fondo Nairo Quintana 2026, donde pedalearás junto al gran Nairo Quintana y sus invitados especiales. Dos modalidades disponibles: Gran Fondo (186 km, 1.150 m de desnivel) y Medio Fondo (106 km, 550 m de desnivel). Incluye alojamiento en hotel boutique, todas las comidas, tours guiados, inscripción al evento y Kit Santander Cycling."
               data-lang-en="The main event is the Gran Fondo Nairo Quintana 2026, where you'll ride alongside the great Nairo Quintana and his special guests. Two modalities available: Gran Fondo (186 km, 1,150 m elevation) and Medio Fondo (106 km, 550 m elevation). Includes boutique hotel accommodation, all meals, guided tours, event registration, and Santander Cycling Kit.">
-              El evento central es el Gran Fondo Nairo Quintana 2026, donde pedalearás junto al gran Nairo Quintana y sus invitados especiales. Dos modalidades disponibles: Gran Fondo (186 km, 1.150 m de desnivel) y Medio Fondo (106 km, 550 m de desnivel). Incluye alojamiento en hotel boutique, todas las comidas, tours guiados, inscripción al evento y Kit Santander Cycling.
+              El evento central es el Gran Fondo Nairo Quintana 2026, donde
+              pedalearás junto al gran Nairo Quintana y sus invitados
+              especiales. Dos modalidades disponibles: Gran Fondo (186 km, 1.150
+              m de desnivel) y Medio Fondo (106 km, 550 m de desnivel). Incluye
+              alojamiento en hotel boutique, todas las comidas, tours guiados,
+              inscripción al evento y Kit Santander Cycling.
             </p>
           </div>
 
           <!-- Right: Itinerary -->
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Itinerario" data-lang-en="Itinerary">Itinerario</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="Itinerario" data-lang-en="Itinerary">Itinerario</h3>
             <div class="space-y-3">
               <!-- Day 1 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 1" data-lang-en="Day 1">Día 1</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Bienvenida" data-lang-en="Welcome">Bienvenida</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 1" data-lang-en="Day 1">Día 1</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Bienvenida"
+                    data-lang-en="Welcome">Bienvenida</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Llegada a Cartagena. Transfer al hotel boutique, preparación de bicicletas, welcome coffee y cena en el hotel." data-lang-en="Arrival in Cartagena. Transfer to boutique hotel, bike preparation, welcome coffee, and dinner at the hotel.">Llegada a Cartagena. Transfer al hotel boutique, preparación de bicicletas, welcome coffee y cena en el hotel.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Llegada a Cartagena. Transfer al hotel boutique, preparación de bicicletas, welcome coffee y cena en el hotel."
+                  data-lang-en="Arrival in Cartagena. Transfer to boutique hotel, bike preparation, welcome coffee, and dinner at the hotel.">Llegada
+                  a Cartagena. Transfer al hotel boutique, preparación de
+                  bicicletas, welcome coffee y cena en el hotel.</p>
               </div>
               <!-- Day 2 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 2" data-lang-en="Day 2">Día 2</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Centro Histórico" data-lang-en="Historic Center">Centro Histórico</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 2" data-lang-en="Day 2">Día 2</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Centro Histórico"
+                    data-lang-en="Historic Center">Centro Histórico</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Rodada costera hacia Barranquilla. Castillo de San Felipe, Museo del Cacao, Torre del Reloj, Ciudad Amurallada. Cena en Getsemaní." data-lang-en="Coastal ride toward Barranquilla. Castillo de San Felipe, Cacao Museum, Clock Tower, Walled City. Dinner in Getsemaní.">Rodada costera hacia Barranquilla. Castillo de San Felipe, Museo del Cacao, Torre del Reloj, Ciudad Amurallada. Cena en Getsemaní.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Rodada costera hacia Barranquilla. Castillo de San Felipe, Museo del Cacao, Torre del Reloj, Ciudad Amurallada. Cena en Getsemaní."
+                  data-lang-en="Coastal ride toward Barranquilla. Castillo de San Felipe, Cacao Museum, Clock Tower, Walled City. Dinner in Getsemaní.">Rodada
+                  costera hacia Barranquilla. Castillo de San Felipe, Museo del
+                  Cacao, Torre del Reloj, Ciudad Amurallada. Cena en
+                  Getsemaní.</p>
               </div>
               <!-- Day 3 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 3" data-lang-en="Day 3">Día 3</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Playas Cristalinas" data-lang-en="Crystal-Clear Beaches">Playas Cristalinas</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 3" data-lang-en="Day 3">Día 3</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Playas Cristalinas"
+                    data-lang-en="Crystal-Clear Beaches">Playas Cristalinas</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Playa Barú, tour por las Islas del Rosario, Gran Oceanario de Cartagena. Almuerzo con pescado fresco del mar." data-lang-en="Barú Beach, Rosario Islands tour, Cartagena Grand Oceanarium. Fresh sea fish lunch.">Playa Barú, tour por las Islas del Rosario, Gran Oceanario de Cartagena. Almuerzo con pescado fresco del mar.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Playa Barú, tour por las Islas del Rosario, Gran Oceanario de Cartagena. Almuerzo con pescado fresco del mar."
+                  data-lang-en="Barú Beach, Rosario Islands tour, Cartagena Grand Oceanarium. Fresh sea fish lunch.">Playa
+                  Barú, tour por las Islas del Rosario, Gran Oceanario de
+                  Cartagena. Almuerzo con pescado fresco del mar.</p>
               </div>
               <!-- Day 4 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 4" data-lang-en="Day 4">Día 4</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Cabalgata" data-lang-en="Horseback Riding">Cabalgata</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 4" data-lang-en="Day 4">Día 4</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Cabalgata"
+                    data-lang-en="Horseback Riding">Cabalgata</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Rodada corta por Cartagena. Almuerzo en la playa, cabalgata a lo largo de la orilla del mar y atardecer en Cartagena." data-lang-en="Short ride through Cartagena. Beach lunch, horseback riding along the shoreline, and Cartagena sunset.">Rodada corta por Cartagena. Almuerzo en la playa, cabalgata a lo largo de la orilla del mar y atardecer en Cartagena.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Rodada corta por Cartagena. Almuerzo en la playa, cabalgata a lo largo de la orilla del mar y atardecer en Cartagena."
+                  data-lang-en="Short ride through Cartagena. Beach lunch, horseback riding along the shoreline, and Cartagena sunset.">Rodada
+                  corta por Cartagena. Almuerzo en la playa, cabalgata a lo
+                  largo de la orilla del mar y atardecer en Cartagena.</p>
               </div>
               <!-- Day 5 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 5" data-lang-en="Day 5">Día 5</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Tour por la Bahía" data-lang-en="Bay Tour">Tour por la Bahía</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 5" data-lang-en="Day 5">Día 5</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Tour por la Bahía"
+                    data-lang-en="Bay Tour">Tour por la Bahía</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Mañana libre en el hotel. Paseo por la playa y compra de artesanías. Tour por la bahía de Cartagena con cena a bordo al atardecer." data-lang-en="Free morning at the hotel. Beach walk and souvenir shopping. Cartagena bay tour with dinner on board at sunset.">Mañana libre en el hotel. Paseo por la playa y compra de artesanías. Tour por la bahía de Cartagena con cena a bordo al atardecer.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Mañana libre en el hotel. Paseo por la playa y compra de artesanías. Tour por la bahía de Cartagena con cena a bordo al atardecer."
+                  data-lang-en="Free morning at the hotel. Beach walk and souvenir shopping. Cartagena bay tour with dinner on board at sunset.">Mañana
+                  libre en el hotel. Paseo por la playa y compra de artesanías.
+                  Tour por la bahía de Cartagena con cena a bordo al
+                  atardecer.</p>
               </div>
               <!-- Day 6 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 6" data-lang-en="Day 6">Día 6</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Welcome Ride" data-lang-en="Welcome Ride">Welcome Ride</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 6" data-lang-en="Day 6">Día 6</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Welcome Ride"
+                    data-lang-en="Welcome Ride">Welcome Ride</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Welcome Ride oficial del evento. Feria comercial Gran Fondo Nairo Quintana con charlas inspiradoras y artistas invitados. Recogida del kit del evento." data-lang-en="Official event Welcome Ride. Gran Fondo Nairo Quintana trade fair with inspiring talks and guest artists. Event kit pickup.">Welcome Ride oficial del evento. Feria comercial Gran Fondo Nairo Quintana con charlas inspiradoras y artistas invitados. Recogida del kit del evento.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Welcome Ride oficial del evento. Feria comercial Gran Fondo Nairo Quintana con charlas inspiradoras y artistas invitados. Recogida del kit del evento."
+                  data-lang-en="Official event Welcome Ride. Gran Fondo Nairo Quintana trade fair with inspiring talks and guest artists. Event kit pickup.">Welcome
+                  Ride oficial del evento. Feria comercial Gran Fondo Nairo
+                  Quintana con charlas inspiradoras y artistas invitados.
+                  Recogida del kit del evento.</p>
               </div>
               <!-- Day 7 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 7 — Gran Fondo" data-lang-en="Day 7 — Gran Fondo">Día 7 — Gran Fondo</p>
-                  <p class="text-white text-xs font-accent">186 km · 1.150 m↑</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 7 — Gran Fondo"
+                    data-lang-en="Day 7 — Gran Fondo">Día 7 — Gran Fondo</p>
+                  <p class="text-white text-xs font-accent">186 km · 1.150
+                    m↑</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="¡El gran día! Carrera junto a Nairo Quintana y sus invitados especiales. Hidratación y asistencia durante toda la ruta. Cruce de meta como un profesional. Ceremonia de cierre." data-lang-en="The big day! Race alongside Nairo Quintana and his special guests. Hydration and assistance throughout the route. Cross the finish line like a pro. Closing ceremony.">¡El gran día! Carrera junto a Nairo Quintana y sus invitados especiales. Hidratación y asistencia durante toda la ruta. Cruce de meta como un profesional. Ceremonia de cierre.</p>
+                <p class="text-white text-xs"
+                  data-lang-es="¡El gran día! Carrera junto a Nairo Quintana y sus invitados especiales. Hidratación y asistencia durante toda la ruta. Cruce de meta como un profesional. Ceremonia de cierre."
+                  data-lang-en="The big day! Race alongside Nairo Quintana and his special guests. Hydration and assistance throughout the route. Cross the finish line like a pro. Closing ceremony.">¡El
+                  gran día! Carrera junto a Nairo Quintana y sus invitados
+                  especiales. Hidratación y asistencia durante toda la ruta.
+                  Cruce de meta como un profesional. Ceremonia de cierre.</p>
               </div>
               <!-- Day 8 -->
               <div class="bg-white/5 border border-white/5 rounded-xl p-4">
                 <div class="flex justify-between items-center mb-1">
-                  <p class="text-gray-400 font-accent font-bold text-sm" data-lang-es="Día 8" data-lang-en="Day 8">Día 8</p>
-                  <p class="text-white text-xs font-accent" data-lang-es="Despedida" data-lang-en="Farewell">Despedida</p>
+                  <p class="text-gray-400 font-accent font-bold text-sm"
+                    data-lang-es="Día 8" data-lang-en="Day 8">Día 8</p>
+                  <p class="text-white text-xs font-accent"
+                    data-lang-es="Despedida"
+                    data-lang-en="Farewell">Despedida</p>
                 </div>
-                <p class="text-white text-xs" data-lang-es="Desayuno incluido. Transfer al Aeropuerto Rafael Núñez. ¡Hasta la próxima aventura en Colombia!" data-lang-en="Breakfast included. Transfer to Rafael Núñez Airport. Until the next adventure in Colombia!">Desayuno incluido. Transfer al Aeropuerto Rafael Núñez. ¡Hasta la próxima aventura en Colombia!</p>
+                <p class="text-white text-xs"
+                  data-lang-es="Desayuno incluido. Transfer al Aeropuerto Rafael Núñez. ¡Hasta la próxima aventura en Colombia!"
+                  data-lang-en="Breakfast included. Transfer to Rafael Núñez Airport. Until the next adventure in Colombia!">Desayuno
+                  incluido. Transfer al Aeropuerto Rafael Núñez. ¡Hasta la
+                  próxima aventura en Colombia!</p>
               </div>
             </div>
           </div>
@@ -2287,109 +2703,187 @@
 
         <!-- Stats expanded -->
         <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12">
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">186 km</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Gran Fondo" data-lang-en="Gran Fondo">Gran Fondo</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Gran Fondo"
+              data-lang-en="Gran Fondo">Gran Fondo</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">106 km</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Medio Fondo" data-lang-en="Medio Fondo">Medio Fondo</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Medio Fondo"
+              data-lang-en="Medio Fondo">Medio Fondo</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">1,150 m</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Desnivel Máx" data-lang-en="Max Elevation">Desnivel Máx</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Desnivel Máx"
+              data-lang-en="Max Elevation">Desnivel Máx</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">8</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Días" data-lang-en="Days">Días</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Días"
+              data-lang-en="Days">Días</p>
           </div>
-          <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <div
+            class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
             <p class="font-accent font-bold text-2xl text-gray-300">7</p>
-            <p class="text-[11px] text-white mt-1" data-lang-es="Noches" data-lang-en="Nights">Noches</p>
+            <p class="text-[11px] text-white mt-1" data-lang-es="Noches"
+              data-lang-en="Nights">Noches</p>
           </div>
         </div>
 
         <!-- Qué incluye / No incluye -->
         <div class="grid md:grid-cols-2 gap-8 mb-12">
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Qué Incluye" data-lang-en="What's Included">Qué Incluye</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="Qué Incluye" data-lang-en="What's Included">Qué
+              Incluye</h3>
             <ul class="space-y-2.5">
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Alojamiento en hotel boutique" data-lang-en="Boutique hotel accommodation">Alojamiento en hotel boutique</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Alojamiento en hotel boutique"
+                  data-lang-en="Boutique hotel accommodation">Alojamiento en
+                  hotel boutique</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Traslados desde/hacia Aeropuerto de Cartagena" data-lang-en="Transfers from/to Cartagena Airport">Traslados desde/hacia Aeropuerto de Cartagena</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span
+                  data-lang-es="Traslados desde/hacia Aeropuerto de Cartagena"
+                  data-lang-en="Transfers from/to Cartagena Airport">Traslados
+                  desde/hacia Aeropuerto de Cartagena</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Transporte durante todo el tour" data-lang-en="Transport throughout the tour">Transporte durante todo el tour</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Transporte durante todo el tour"
+                  data-lang-en="Transport throughout the tour">Transporte
+                  durante todo el tour</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Desayunos diarios" data-lang-en="Daily breakfasts">Desayunos diarios</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Desayunos diarios"
+                  data-lang-en="Daily breakfasts">Desayunos diarios</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Almuerzos" data-lang-en="Lunches">Almuerzos</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Almuerzos"
+                  data-lang-en="Lunches">Almuerzos</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
                 <span data-lang-es="Cenas" data-lang-en="Dinners">Cenas</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Tours guiados con acompañamiento profesional" data-lang-en="Guided tours with professional support">Tours guiados con acompañamiento profesional</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span
+                  data-lang-es="Tours guiados con acompañamiento profesional"
+                  data-lang-en="Guided tours with professional support">Tours
+                  guiados con acompañamiento profesional</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Kit Santander Cycling" data-lang-en="Santander Cycling Kit">Kit Santander Cycling</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Kit Santander Cycling"
+                  data-lang-en="Santander Cycling Kit">Kit Santander
+                  Cycling</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Inscripción al Gran Fondo Nairo Quintana" data-lang-en="Gran Fondo Nairo Quintana registration">Inscripción al Gran Fondo Nairo Quintana</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Inscripción al Gran Fondo Nairo Quintana"
+                  data-lang-en="Gran Fondo Nairo Quintana registration">Inscripción
+                  al Gran Fondo Nairo Quintana</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Hidratación durante las rutas en bicicleta" data-lang-en="Hydration during cycling routes">Hidratación durante las rutas en bicicleta</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Hidratación durante las rutas en bicicleta"
+                  data-lang-en="Hydration during cycling routes">Hidratación
+                  durante las rutas en bicicleta</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span data-lang-es="Asistencia mecánica" data-lang-en="Mechanical assistance">Asistencia mecánica</span>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+                <span data-lang-es="Asistencia mecánica"
+                  data-lang-en="Mechanical assistance">Asistencia
+                  mecánica</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
                 <span data-lang-es="Snacks" data-lang-en="Snacks">Snacks</span>
               </li>
             </ul>
           </div>
           <div>
-            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="No Incluye" data-lang-en="Not Included">No Incluye</h3>
+            <h3 class="font-heading text-2xl text-white mb-4"
+              data-lang-es="No Incluye" data-lang-en="Not Included">No
+              Incluye</h3>
             <ul class="space-y-2.5">
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Ítems no mencionados en el plan" data-lang-en="Items not mentioned in the plan">Ítems no mencionados en el plan</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Ítems no mencionados en el plan"
+                  data-lang-en="Items not mentioned in the plan">Ítems no
+                  mencionados en el plan</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Gastos personales" data-lang-en="Personal expenses">Gastos personales</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Gastos personales"
+                  data-lang-en="Personal expenses">Gastos personales</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Tiquetes aéreos hacia/desde el tour" data-lang-en="Airline tickets to/from the tour">Tiquetes aéreos hacia/desde el tour</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Tiquetes aéreos hacia/desde el tour"
+                  data-lang-en="Airline tickets to/from the tour">Tiquetes
+                  aéreos hacia/desde el tour</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Bebidas alcohólicas" data-lang-en="Alcoholic beverages">Bebidas alcohólicas</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Bebidas alcohólicas"
+                  data-lang-en="Alcoholic beverages">Bebidas alcohólicas</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Alquiler de bicicleta" data-lang-en="Bicycle rental">Alquiler de bicicleta</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Alquiler de bicicleta"
+                  data-lang-en="Bicycle rental">Alquiler de bicicleta</span>
               </li>
               <li class="flex items-start gap-2.5 text-white text-sm">
-                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                <span data-lang-es="Propinas" data-lang-en="Tips">Propinas</span>
+                <svg class="w-4 h-4 text-white mt-0.5 flex-shrink-0"
+                  fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                <span data-lang-es="Propinas"
+                  data-lang-en="Tips">Propinas</span>
               </li>
             </ul>
           </div>
@@ -2397,18 +2891,29 @@
 
         <!-- Modalidades -->
         <div class="mb-12">
-          <h3 class="font-heading text-2xl text-white mb-2 text-center" data-lang-es="Modalidades" data-lang-en="Modalities">Modalidades</h3>
-          <p class="text-white text-xs text-center mb-4 font-accent" data-lang-es="Gran Fondo Nairo Quintana 2026" data-lang-en="Gran Fondo Nairo Quintana 2026">Gran Fondo Nairo Quintana 2026</p>
+          <h3 class="font-heading text-2xl text-white mb-2 text-center"
+            data-lang-es="Modalidades"
+            data-lang-en="Modalities">Modalidades</h3>
+          <p class="text-white text-xs text-center mb-4 font-accent"
+            data-lang-es="Gran Fondo Nairo Quintana 2026"
+            data-lang-en="Gran Fondo Nairo Quintana 2026">Gran Fondo Nairo
+            Quintana 2026</p>
           <div class="grid sm:grid-cols-2 gap-3">
-            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+            <div
+              class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
               <p class="text-white text-sm font-semibold mb-1">Gran Fondo</p>
               <p class="text-gray-400 font-accent font-bold text-lg">186 km</p>
-              <p class="text-white text-xs mt-1" data-lang-es="1.150 m de desnivel" data-lang-en="1,150 m elevation gain">1.150 m de desnivel</p>
+              <p class="text-white text-xs mt-1"
+                data-lang-es="1.150 m de desnivel"
+                data-lang-en="1,150 m elevation gain">1.150 m de desnivel</p>
             </div>
-            <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
+            <div
+              class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
               <p class="text-white text-sm font-semibold mb-1">Medio Fondo</p>
               <p class="text-gray-400 font-accent font-bold text-lg">106 km</p>
-              <p class="text-white text-xs mt-1" data-lang-es="550 m de desnivel" data-lang-en="550 m elevation gain">550 m de desnivel</p>
+              <p class="text-white text-xs mt-1"
+                data-lang-es="550 m de desnivel"
+                data-lang-en="550 m elevation gain">550 m de desnivel</p>
             </div>
           </div>
         </div>
@@ -2418,10 +2923,17 @@
           <a
             href="https://wa.me/573208032292?text=Hola!%20Quiero%20reservar%20el%20Gran%20Fondo%20Nairo%20Quintana%20Cartagena"
             class="inline-flex items-center gap-3 bg-gray-500 hover:bg-gray-400 text-carbon font-bold px-8 py-4 rounded-full text-base transition-all duration-300 hover:shadow-lg hover:shadow-gray-500/20 hover:-translate-y-0.5">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.661-6.085-1.797l-.427-.268-2.825.946.946-2.825-.268-.427A9.957 9.957 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-            <span data-lang-es="Reservar Gran Fondo Nairo Quintana" data-lang-en="Book Gran Fondo Nairo Quintana">Reservar Gran Fondo Nairo Quintana</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.661-6.085-1.797l-.427-.268-2.825.946.946-2.825-.268-.427A9.957 9.957 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" /></svg>
+            <span data-lang-es="Reservar Gran Fondo Nairo Quintana"
+              data-lang-en="Book Gran Fondo Nairo Quintana">Reservar Gran Fondo
+              Nairo Quintana</span>
           </a>
-          <p class="text-white text-xs mt-4" data-lang-es="info@santandercycling.com · WhatsApp: +57 320 8032292" data-lang-en="info@santandercycling.com · WhatsApp: +57 320 8032292">info@santandercycling.com · WhatsApp: +57 320 8032292</p>
+          <p class="text-white text-xs mt-4"
+            data-lang-es="info@santandercycling.com · WhatsApp: +57 320 8032292"
+            data-lang-en="info@santandercycling.com · WhatsApp: +57 320 8032292">info@santandercycling.com
+            · WhatsApp: +57 320 8032292</p>
         </div>
 
       </div>
@@ -2972,12 +3484,17 @@
     window.addEventListener('load', () => {
       const preloader = document.getElementById('preloader');
       setTimeout(() => {
-        preloader.style.transition = 'opacity 0.6s ease';
-        preloader.style.opacity = '0';
+      ['m1','m2','m3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      const len = Math.ceil(el.getTotalLength());
+      el.style.setProperty(`--len${i + 1}`, len);
+      el.style.strokeDasharray  = len;
+      el.style.strokeDashoffset = len;
+    });
         setTimeout(() => {
           preloader.style.display = 'none';
-        }, 600);
-      }, 1800);
+        }, 1100);
+      }, 1000);
     });
 
     // ==============================
