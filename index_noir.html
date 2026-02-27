@@ -275,19 +275,23 @@
     /* Chicamocha Modal */
     .chicamocha-modal {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.2s ease, visibility 0.2s;
+      will-change: opacity;
     }
     .chicamocha-modal.active {
       opacity: 1;
+      visibility: visible;
       pointer-events: all;
     }
     .chicamocha-modal .modal-content {
-      transform: translateY(40px) scale(0.97);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
     }
     .chicamocha-modal.active .modal-content {
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
     .chicamocha-modal .gallery-thumb {
       transition: all 0.3s ease;
@@ -303,25 +307,15 @@
       opacity: 0.8;
     }
     .modal-gallery-img {
-      transition: opacity 0.4s ease;
+      transition: opacity 0.15s ease;
     }
 
     /* Cartagena Modal */
-    .cartagena-modal {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
+    #cartagena-modal {
+      display: none;
     }
-    .cartagena-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .cartagena-modal .modal-content {
-      transform: translateY(40px) scale(0.97);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .cartagena-modal.active .modal-content {
-      transform: translateY(0) scale(1);
+    #cartagena-modal.active {
+      display: flex;
     }
     .cartagena-modal .gallery-thumb {
       transition: all 0.3s ease;
@@ -419,39 +413,23 @@ preloader
     <!-- ============================================ -->
     <!-- PRELOADER -->
     <!-- ============================================ -->
-      <div id="preloader"
+    <div id="preloader"
       class="fixed inset-0 z-[100] bg-carbon flex items-center justify-center">
-    <div class="logo-loader">
-   <svg id="logo-svg" viewBox="0 0 1400 880" xmlns="http://www.w3.org/2000/svg">
-      <!-- Montaña izquierda: la pata derecha para en la intersección con m2 -->
-      <polyline id="m1" class="path m1"
-        points="10,880 288,232 476,588" />
-      <!-- Montaña centro (la más alta) -->
-      <polyline id="m2" class="path m2"
-        points="360,880 700,24 1040,880" />
-      <!-- Montaña derecha: la pata izquierda para en la intersección con m2 -->
-      <polyline id="m3" class="path m3"
-        points="924,588 1112,232 1390,880" />
-    </svg>
-    </div>
-    </div>
-
-    <!-- <div id="preloader"
-      class="fixed inset-0 z-[100] bg-carbon flex items-center justify-center">
-      <div class="text-center">
-        <svg class="w-20 h-20 mx-auto mb-4" viewBox="0 0 120 80" fill="none">
-          <path d="M10 70 L35 15 L60 70" stroke="#999999" stroke-width="3.5"
-            stroke-linecap="round" stroke-linejoin="round"
-            style="stroke-dasharray:200;stroke-dashoffset:200;animation:draw 1s ease-out 0.2s forwards" />
-          <path d="M35 25 L60 70 L85 15 L110 70" stroke="#444444"
-            stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
-            style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1s ease-out 0.5s forwards" />
+      <div class="logo-loader">
+        <svg id="logo-svg" viewBox="0 0 1400 880"
+          xmlns="http://www.w3.org/2000/svg">
+          <!-- Montaña izquierda: la pata derecha para en la intersección con m2 -->
+          <polyline id="m1" class="path m1"
+            points="10,880 288,232 476,588" />
+          <!-- Montaña centro (la más alta) -->
+          <polyline id="m2" class="path m2"
+            points="360,880 700,24 1040,880" />
+          <!-- Montaña derecha: la pata izquierda para en la intersección con m2 -->
+          <polyline id="m3" class="path m3"
+            points="924,588 1112,232 1390,880" />
         </svg>
-        <p
-          class="font-heading text-xl tracking-[0.3em] text-white uppercase">Santander</p>
       </div>
-      <style>@keyframes draw{to{stroke-dashoffset:0}}</style>
-    </div> -->
+    </div>
 
     <!-- ============================================ -->
     <!-- NAVIGATION -->
@@ -463,7 +441,7 @@ preloader
         <!-- Logo -->
         <a href="#hero" class="flex items-center gap-3 group">
           <div class="hidden sm:flex items-center gap-3">
-            <img src="images/isotipo_White2.png" alt="Santander Cycling"
+            <img src="images/Isotipo_White2.png" alt="Santander Cycling"
               class="w-16 h-auto transition-opacity group-hover:opacity-90">
             <img src="images/Logotipo_White2.png" alt="Santander Cycling"
               class="w-64 h-16 transition-opacity group-hover:opacity-90">
@@ -876,9 +854,8 @@ preloader
                   data-lang-es="ETAPA 1" data-lang-en="STAGE 1">ETAPA
                   1</span>
                 <h3 class="font-heading text-4xl text-white mt-1"
-                  data-lang-es="Bucaramanga — San Gil"
-                  data-lang-en="Bucaramanga — San Gil">Bucaramanga — San
-                  Gil</h3>
+                  data-lang-es="Mesa de los santos"
+                  data-lang-en="Mesa de los santos">Mesa de los santos</h3>
               </div>
               <div>
                 <!-- Elevation SVG -->
@@ -901,7 +878,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
-                    82 km
+                   32.33 km
                   </span>
                   <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
@@ -909,7 +886,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                    2,100 m
+                    562 m
                   </span>
                 </div>
               </div>
@@ -933,8 +910,8 @@ preloader
                   data-lang-es="ETAPA 2" data-lang-en="STAGE 2">ETAPA
                   2</span>
                 <h3 class="font-heading text-4xl text-white mt-1"
-                  data-lang-es="San Gil — Barichara"
-                  data-lang-en="San Gil — Barichara">San Gil — Barichara</h3>
+                  data-lang-es="Mesa de los Santos — Barichara"
+                  data-lang-en="Mesa de los Santos — Barichara">Mesa de los Santos — Barichara</h3>
               </div>
               <div>
                 <svg class="w-full h-12 mb-3" viewBox="0 0 200 50" fill="none">
@@ -952,7 +929,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
-                    65 km
+                    40.85 km
                   </span>
                   <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
@@ -960,7 +937,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                    1,850 m
+                    495 m
                   </span>
                 </div>
               </div>
@@ -984,8 +961,8 @@ preloader
                   data-lang-es="ETAPA 3" data-lang-en="STAGE 3">ETAPA
                   3</span>
                 <h3 class="font-heading text-4xl text-white mt-1"
-                  data-lang-es="Cañón del Chicamocha"
-                  data-lang-en="Chicamocha Canyon">Cañón del Chicamocha</h3>
+                  data-lang-es="Barichara -  Guane"
+                  data-lang-en="Barichara -  Guane">Barichara -  Guane</h3>
               </div>
               <div>
                 <svg class="w-full h-12 mb-3" viewBox="0 0 200 50" fill="none">
@@ -1003,7 +980,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
-                    56.71 km
+                    35.65 km
                   </span>
                   <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
@@ -1011,7 +988,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                    1,694 m
+                    872 m
                   </span>
                 </div>
               </div>
@@ -1054,7 +1031,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
-                    119.9 km
+                    68.07 km
                   </span>
                   <span class="flex items-center gap-1 text-white">
                     <svg class="w-4 h-4 text-accent" fill="none"
@@ -1062,7 +1039,7 @@ preloader
                         stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2"
                         d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                    2,826 m
+                    1885 m
                   </span>
                 </div>
               </div>
@@ -1746,8 +1723,8 @@ preloader
             <h2
               class="font-heading text-5xl sm:text-6xl text-white leading-none mb-6">
               <span
-                data-lang-es="4 Etapas.<br>323 Kilómetros.<br>Un Viaje Inolvidable."
-                data-lang-en="4 Stages.<br>323 Kilometers.<br>An Unforgettable Journey.">4
+                data-lang-es="4 Etapas. 323 Kilómetros. Un Viaje Inolvidable."
+                data-lang-en="4 Stages. 323 Kilometers. An Unforgettable Journey.">4
                 Etapas.<br>323 Kilómetros.<br>Un Viaje Inolvidable.</span>
             </h2>
             <p class="text-white text-base leading-relaxed mb-8"
@@ -1948,11 +1925,11 @@ preloader
 
     <!-- ====== CHICAMOCHA MODAL ====== -->
     <div id="chicamocha-modal"
-      class="chicamocha-modal fixed inset-0 z-[100] bg-carbon/95 backdrop-blur-2xl flex items-start justify-center overflow-y-auto">
+      class="chicamocha-modal fixed inset-0 z-[100] bg-carbon flex items-start justify-center overflow-y-auto">
 
       <!-- Close button -->
       <button onclick="closeChicamochaModal()"
-        class="fixed top-6 right-6 z-[101] text-white hover:text-white transition-colors bg-carbon/60 backdrop-blur-sm rounded-full p-2">
+        class="fixed top-6 right-6 z-[101] text-white hover:text-white transition-colors bg-carbon/80 rounded-full p-2">
         <svg class="w-7 h-7" fill="none" stroke="currentColor"
           viewBox="0 0 24 24"><path stroke-linecap="round"
             stroke-linejoin="round" stroke-width="2"
@@ -2411,11 +2388,11 @@ preloader
 
     <!-- ====== CARTAGENA MODAL ====== -->
     <div id="cartagena-modal"
-      class="cartagena-modal fixed inset-0 z-[100] bg-carbon/95 backdrop-blur-2xl flex items-start justify-center overflow-y-auto">
+      class="cartagena-modal fixed inset-0 z-[100] bg-carbon flex items-start justify-center overflow-y-auto">
 
       <!-- Close button -->
       <button onclick="closeCartagenaModal()"
-        class="fixed top-6 right-6 z-[101] text-white hover:text-white transition-colors bg-carbon/60 backdrop-blur-sm rounded-full p-2">
+        class="fixed top-6 right-6 z-[101] text-white hover:text-white transition-colors bg-carbon/80 rounded-full p-2">
         <svg class="w-7 h-7" fill="none" stroke="currentColor"
           viewBox="0 0 24 24"><path stroke-linecap="round"
             stroke-linejoin="round" stroke-width="2"
@@ -2472,7 +2449,7 @@ preloader
             <!-- Counter -->
             <div
               class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
-              <span id="cartagena-gallery-counter">1 / 10</span>
+              <span id="cartagena-gallery-counter">1 / 7</span>
             </div>
           </div>
           <!-- Thumbnails -->
@@ -2489,40 +2466,25 @@ preloader
             </button>
             <button onclick="setCartagenaImage(2)"
               class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/4.webp" alt="Ciclistas Cartagena"
+              <img src="images/ciclistas/5.webp" alt="Ciclistas Cartagena"
                 class="w-full h-full object-cover">
             </button>
             <button onclick="setCartagenaImage(3)"
               class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/5.webp" alt="Ciclistas Cartagena"
+              <img src="images/ciclistas/7.webp" alt="Ciclistas Cartagena"
                 class="w-full h-full object-cover">
             </button>
             <button onclick="setCartagenaImage(4)"
               class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/6.webp" alt="Ciclistas Cartagena"
+              <img src="images/ciclistas/8.webp" alt="Ciclistas Cartagena"
                 class="w-full h-full object-cover">
             </button>
             <button onclick="setCartagenaImage(5)"
               class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/7.webp" alt="Ciclistas Cartagena"
-                class="w-full h-full object-cover">
-            </button>
-            <button onclick="setCartagenaImage(6)"
-              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/8.webp" alt="Ciclistas Cartagena"
-                class="w-full h-full object-cover">
-            </button>
-            <button onclick="setCartagenaImage(7)"
-              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
-              <img src="images/ciclistas/9.webp" alt="Ciclistas Cartagena"
-                class="w-full h-full object-cover">
-            </button>
-            <button onclick="setCartagenaImage(8)"
-              class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
               <img src="images/ciclistas/10.webp" alt="Ciclistas Cartagena"
                 class="w-full h-full object-cover">
             </button>
-            <button onclick="setCartagenaImage(9)"
+            <button onclick="setCartagenaImage(6)"
               class="gallery-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 border-transparent">
               <img src="images/ciclistas/11.webp" alt="Ciclistas Cartagena"
                 class="w-full h-full object-cover">
@@ -3235,14 +3197,9 @@ preloader
       class="relative py-24 md:py-32 bg-primary topo-pattern overflow-hidden">
       <div
         class="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
-        <svg class="w-16 h-16 mx-auto mb-6 opacity-30" viewBox="0 0 120 80"
-          fill="none">
-          <path d="M10 70 L35 15 L60 70" stroke="#999999" stroke-width="3"
-            stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M35 25 L60 70 L85 15 L110 70" stroke="white" stroke-width="3"
-            stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+      <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center gap-6">
+        <img src="images/Isotipo_White2.png" alt="Santander Cycling"
+                class="object-contain w-32" >
         <h2
           class="font-heading text-5xl sm:text-6xl lg:text-7xl text-white leading-none mb-4"
           data-aos="fade-up">
@@ -3289,19 +3246,11 @@ preloader
           <!-- Brand -->
           <div class="lg:col-span-1">
             <a href="#hero" class="flex items-center gap-3 mb-6">
-              <svg class="w-10 h-10" viewBox="0 0 120 80" fill="none">
-                <path d="M10 70 L35 15 L60 70" stroke="#999999" stroke-width="5"
-                  stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M35 25 L60 70 L85 15 L110 70" stroke="white"
-                  stroke-width="5" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
+              <img src="images/Isotipo_White2.png" alt="Santander Cycling"
+                class="h-6 object-contain">
               <div>
-                <span
-                  class="block font-heading text-xl tracking-wider leading-none text-white">SANTANDER</span>
-                <span
-                  class="block text-[9px] tracking-[0.25em] text-white font-accent uppercase">Cycling
-                  & Experiences</span>
+               <img src="images/Logotipo_White2.png"
+                  alt="Santander Cycling slogan" class="h-6 object-contain">
               </div>
             </a>
             <p class="text-white text-sm leading-relaxed"
@@ -3729,8 +3678,7 @@ preloader
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
       setModalImage(0);
-      // re-apply current language to modal content
-      setLang(currentLang);
+      //setLang(currentLang);
     }
 
     function closeChicamochaModal() {
@@ -3793,12 +3741,9 @@ preloader
     const cartagenaGalleryImages = [
       'images/ciclistas/2.webp',
       'images/ciclistas/3.webp',
-      'images/ciclistas/4.webp',
       'images/ciclistas/5.webp',
-      'images/ciclistas/6.webp',
       'images/ciclistas/7.webp',
       'images/ciclistas/8.webp',
-      'images/ciclistas/9.webp',
       'images/ciclistas/10.webp',
       'images/ciclistas/11.webp',
     ];
@@ -3809,7 +3754,6 @@ preloader
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
       setCartagenaImage(0);
-      setLang(currentLang);
     }
 
     function closeCartagenaModal() {
