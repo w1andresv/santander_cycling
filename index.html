@@ -281,6 +281,36 @@
       background: rgba(212, 168, 83, 0.1);
       border: 1px solid rgba(212, 168, 83, 0.3);
     }
+
+    /* Gran Fondo Modal */
+    #granfondo-modal {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    #granfondo-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #granfondo-modal .modal-content {
+      transform: translateY(30px);
+      transition: transform 0.4s ease;
+    }
+    #granfondo-modal.active .modal-content {
+      transform: translateY(0);
+    }
+    .granfondo-thumb {
+      border-color: transparent;
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+      opacity: 0.55;
+    }
+    .granfondo-thumb.active-thumb {
+      border-color: #F59E0B;
+      opacity: 1;
+    }
+    .granfondo-thumb:hover {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -929,22 +959,28 @@
           </p>
           <div class="grid grid-cols-3 gap-3 mb-6">
             <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-              <p class="font-accent font-bold text-xl text-amber-400">160 km</p>
-              <p class="text-[10px] text-white/40 mt-1" data-lang-es="Ruta Larga" data-lang-en="Long Route">Ruta Larga</p>
+              <p class="font-accent font-bold text-xl text-amber-400">186 km</p>
+              <p class="text-[10px] text-white/40 mt-1" data-lang-es="Gran Fondo" data-lang-en="Gran Fondo">Gran Fondo</p>
             </div>
             <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-              <p class="font-accent font-bold text-xl text-amber-400">80 km</p>
-              <p class="text-[10px] text-white/40 mt-1" data-lang-es="Ruta Corta" data-lang-en="Short Route">Ruta Corta</p>
+              <p class="font-accent font-bold text-xl text-amber-400">106 km</p>
+              <p class="text-[10px] text-white/40 mt-1" data-lang-es="Medio Fondo" data-lang-en="Medio Fondo">Medio Fondo</p>
             </div>
             <div class="bg-white/5 border border-white/5 rounded-xl p-4 text-center">
-              <p class="font-accent font-bold text-xl text-amber-400">OCT</p>
-              <p class="text-[10px] text-white/40 mt-1" data-lang-es="Fecha" data-lang-en="Date">Fecha</p>
+              <p class="font-accent font-bold text-xl text-amber-400">9–11</p>
+              <p class="text-[10px] text-white/40 mt-1" data-lang-es="Oct · Cartagena" data-lang-en="Oct · Cartagena">Oct · Cartagena</p>
             </div>
           </div>
-          <a href="https://wa.me/573173780637?text=Hola!%20Quiero%20información%20sobre%20el%20Gran%20Fondo%20Nairo%20Quintana" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-carbon font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5">
-            <span data-lang-es="Reservar esta Ruta" data-lang-en="Book this Route">Reservar esta Ruta</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </a>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://wa.me/573173780637?text=Hola!%20Quiero%20información%20sobre%20el%20Gran%20Fondo%20Nairo%20Quintana" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-carbon font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5">
+              <span data-lang-es="Reservar" data-lang-en="Book Now">Reservar</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <button onclick="openGranFondoModal()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5">
+              <span data-lang-es="Ver Itinerario" data-lang-en="View Itinerary">Ver Itinerario</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
 
         <!-- Image -->
@@ -1665,7 +1701,17 @@
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') {
+        if (document.getElementById('granfondo-modal').classList.contains('active')) {
+          closeGranFondoModal();
+        } else {
+          closeLightbox();
+        }
+      }
+      if (document.getElementById('granfondo-modal').classList.contains('active')) {
+        if (e.key === 'ArrowRight') gfGalleryNext();
+        if (e.key === 'ArrowLeft') gfGalleryPrev();
+      }
     });
 
     // ==============================
@@ -1703,7 +1749,291 @@
         }
       });
     });
+
+    // ==============================
+    // GRAN FONDO NAIRO QUINTANA MODAL
+    // ==============================
+    const gfGalleryImages = [
+      'images/ciclistas/2.webp',
+      'images/ciclistas/3.webp',
+      'images/ciclistas/5.webp',
+      'images/ciclistas/7.webp',
+      'images/ciclistas/8.webp',
+      'images/ciclistas/10.webp',
+      'images/ciclistas/11.webp',
+    ];
+    let gfCurrentIndex = 0;
+
+    function openGranFondoModal() {
+      const modal = document.getElementById('granfondo-modal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      modal.scrollTop = 0;
+      setGfImage(0);
+    }
+
+    function closeGranFondoModal() {
+      const modal = document.getElementById('granfondo-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function setGfImage(index) {
+      gfCurrentIndex = index;
+      document.getElementById('gf-gallery-main').src = gfGalleryImages[index];
+      document.getElementById('gf-gallery-counter').textContent = `${index + 1} / ${gfGalleryImages.length}`;
+      document.querySelectorAll('#granfondo-modal .granfondo-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active-thumb', i === index);
+      });
+    }
+
+    function gfGalleryNext() {
+      setGfImage((gfCurrentIndex + 1) % gfGalleryImages.length);
+    }
+
+    function gfGalleryPrev() {
+      setGfImage((gfCurrentIndex - 1 + gfGalleryImages.length) % gfGalleryImages.length);
+    }
   </script>
+
+  <!-- ============================================ -->
+  <!-- GRAN FONDO NAIRO QUINTANA MODAL -->
+  <!-- ============================================ -->
+  <div id="granfondo-modal" class="fixed inset-0 z-[95] bg-carbon flex items-start justify-center overflow-y-auto">
+
+    <!-- Close button -->
+    <button onclick="closeGranFondoModal()" class="fixed top-6 right-6 z-[96] bg-carbon/80 hover:bg-white/10 text-white rounded-full p-2 transition-colors">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+
+    <div class="modal-content w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <span class="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-accent font-semibold px-3 py-1 rounded-full mb-4">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          <span data-lang-es="Evento Especial" data-lang-en="Special Event">Evento Especial</span>
+        </span>
+        <h2 class="font-heading text-5xl md:text-7xl text-white leading-none mb-3">THE FANTASTIC<br><span class="text-amber-400">Gran Fondo Nairo Quintana</span></h2>
+        <p class="text-white/60 text-sm font-accent" data-lang-es="8 días / 7 noches · Cartagena de Indias · Oct 9–11" data-lang-en="8 days / 7 nights · Cartagena de Indias · Oct 9–11">8 días / 7 noches · Cartagena de Indias · Oct 9–11</p>
+        <p class="text-amber-400/70 text-xs font-accent mt-1" data-lang-es="COLOR · HISTORIA · ALMA CARIBEÑA" data-lang-en="COLOR · HISTORY · CARIBBEAN SOUL">COLOR · HISTORIA · ALMA CARIBEÑA</p>
+      </div>
+
+      <!-- Gallery -->
+      <div class="mb-12">
+        <div class="relative rounded-2xl overflow-hidden h-[280px] md:h-[460px] mb-3 bg-black/40">
+          <img id="gf-gallery-main" src="images/ciclistas/2.webp" alt="Gran Fondo Nairo Quintana" class="w-full h-full object-contain">
+          <button onclick="gfGalleryPrev()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white rounded-full p-2 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button onclick="gfGalleryNext()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-carbon/60 hover:bg-carbon/80 backdrop-blur-sm text-white rounded-full p-2 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <div class="absolute bottom-4 right-4 bg-carbon/60 backdrop-blur-sm text-white text-xs font-accent px-3 py-1 rounded-full">
+            <span id="gf-gallery-counter">1 / 7</span>
+          </div>
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-2">
+          <button onclick="setGfImage(0)" class="granfondo-thumb active-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/2.webp" class="w-full h-full object-cover"></button>
+          <button onclick="setGfImage(1)" class="granfondo-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/3.webp" class="w-full h-full object-cover"></button>
+          <button onclick="setGfImage(2)" class="granfondo-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/5.webp" class="w-full h-full object-cover"></button>
+          <button onclick="setGfImage(3)" class="granfondo-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/7.webp" class="w-full h-full object-cover"></button>
+          <button onclick="setGfImage(4)" class="granfondo-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/8.webp" class="w-full h-full object-cover"></button>
+          <button onclick="setGfImage(5)" class="granfondo-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/10.webp" class="w-full h-full object-cover"></button>
+          <button onclick="setGfImage(6)" class="granfondo-thumb flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2"><img src="images/ciclistas/11.webp" class="w-full h-full object-cover"></button>
+        </div>
+      </div>
+
+      <!-- About + Itinerary -->
+      <div class="grid md:grid-cols-2 gap-10 mb-12">
+
+        <!-- Left: About -->
+        <div>
+          <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Sobre el Tour" data-lang-en="About the Tour">Sobre el Tour</h3>
+          <p class="text-white/70 text-sm leading-relaxed mb-4" data-lang-es="The Fantastic — Color, Historia y Alma Caribeña es una experiencia de 8 días y 7 noches en Cartagena de Indias, una de las ciudades más icónicas del Caribe colombiano. Este tour combina la pasión por el ciclismo con la riqueza cultural, la historia colonial y las playas de ensueño de la Costa Caribe." data-lang-en="The Fantastic — Color, History & Caribbean Soul is an 8-day, 7-night experience in Cartagena de Indias, one of the most iconic cities in the Colombian Caribbean. This tour combines the passion for cycling with cultural richness, colonial history, and dream beaches of the Caribbean Coast.">
+            The Fantastic — Color, Historia y Alma Caribeña es una experiencia de 8 días y 7 noches en Cartagena de Indias, una de las ciudades más icónicas del Caribe colombiano. Este tour combina la pasión por el ciclismo con la riqueza cultural, la historia colonial y las playas de ensueño de la Costa Caribe.
+          </p>
+          <p class="text-white/70 text-sm leading-relaxed mb-4" data-lang-es="Explora la Ciudad Amurallada, el Castillo de San Felipe de Barajas, las Islas del Rosario y Playa Barú. Disfruta de rodadas costeras, cabalgata a orillas del mar, tour por la bahía al atardecer con cena a bordo, y la energía de Getsemaní." data-lang-en="Explore the Walled City, Castillo de San Felipe de Barajas, the Rosario Islands, and Barú Beach. Enjoy coastal rides, horseback riding along the shore, a sunset bay tour with dinner on board, and the energy of the Getsemaní neighborhood.">
+            Explora la Ciudad Amurallada, el Castillo de San Felipe de Barajas, las Islas del Rosario y Playa Barú. Disfruta de rodadas costeras, cabalgata a orillas del mar, tour por la bahía al atardecer con cena a bordo, y la energía de Getsemaní.
+          </p>
+          <p class="text-white/70 text-sm leading-relaxed" data-lang-es="El evento central es el Gran Fondo Nairo Quintana, donde pedalearás junto a Nairo y sus invitados especiales. Elige entre Gran Fondo (186 km / 1.150 m↑) o Medio Fondo (106 km / 550 m↑). Ruta: Cartagena → Santa Rosa de Lima → Villanueva → Cartagena." data-lang-en="The main event is the Gran Fondo Nairo Quintana, where you'll ride alongside Nairo and his special guests. Choose between Gran Fondo (186 km / 1,150 m↑) or Medio Fondo (106 km / 550 m↑). Route: Cartagena → Santa Rosa de Lima → Villanueva → Cartagena.">
+            El evento central es el Gran Fondo Nairo Quintana, donde pedalearás junto a Nairo y sus invitados especiales. Elige entre Gran Fondo (186 km / 1.150 m↑) o Medio Fondo (106 km / 550 m↑). Ruta: Cartagena → Santa Rosa de Lima → Villanueva → Cartagena.
+          </p>
+        </div>
+
+        <!-- Right: Itinerary -->
+        <div>
+          <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Itinerario" data-lang-en="Itinerary">Itinerario</h3>
+          <div class="space-y-2.5">
+            <!-- Day 1 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 1" data-lang-en="Day 1">Día 1</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Bienvenidos a Cartagena" data-lang-en="Welcome to Cartagena">Bienvenidos a Cartagena</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Llegada, transfer al hotel boutique, preparación de bicicletas, welcome coffee y cena en el hotel." data-lang-en="Arrival, transfer to boutique hotel, bike setup, welcome coffee, and dinner at the hotel.">Llegada, transfer al hotel boutique, preparación de bicicletas, welcome coffee y cena en el hotel.</p>
+            </div>
+            <!-- Day 2 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 2" data-lang-en="Day 2">Día 2</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Centro Histórico" data-lang-en="Historic Center">Centro Histórico</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Etapa 1: Bocagrande → Arroyo Grande (82 km / 248 m↑). Ruta costera hacia Barranquilla. Tour por la Ciudad Amurallada, Castillo San Felipe, Torre del Reloj. Cena en Getsemaní." data-lang-en="Stage 1: Bocagrande → Arroyo Grande (82 km / 248 m↑). Coastal ride toward Barranquilla. Historic Walled City, Castillo San Felipe, Clock Tower. Dinner in Getsemaní.">Etapa 1: Bocagrande → Arroyo Grande (82 km / 248 m↑). Ruta costera hacia Barranquilla. Tour por la Ciudad Amurallada, Castillo San Felipe, Torre del Reloj. Cena en Getsemaní.</p>
+            </div>
+            <!-- Day 3 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 3" data-lang-en="Day 3">Día 3</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Playas Cristalinas" data-lang-en="Crystal-Clear Beaches">Playas Cristalinas</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Playa Barú, tour panorámico por las Islas del Rosario y Gran Oceanario de Cartagena. Almuerzo con pescado fresco." data-lang-en="Barú Beach, scenic tour of the Rosario Islands, and Gran Oceanario de Cartagena. Fresh sea fish lunch.">Playa Barú, tour panorámico por las Islas del Rosario y Gran Oceanario de Cartagena. Almuerzo con pescado fresco.</p>
+            </div>
+            <!-- Day 4 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 4" data-lang-en="Day 4">Día 4</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Cabalgata al Atardecer" data-lang-en="Sunset Horseback Ride">Cabalgata al Atardecer</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Etapa 2: Bocagrande → Arjona → Bocagrande (72 km / 508 m↑). Almuerzo en la playa y cabalgata mágica por la orilla del Caribe." data-lang-en="Stage 2: Bocagrande → Arjona → Bocagrande (72 km / 508 m↑). Beach lunch and magical horseback ride along the Caribbean shore.">Etapa 2: Bocagrande → Arjona → Bocagrande (72 km / 508 m↑). Almuerzo en la playa y cabalgata mágica por la orilla del Caribe.</p>
+            </div>
+            <!-- Day 5 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 5" data-lang-en="Day 5">Día 5</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Tour por la Bahía" data-lang-en="Bay Tour">Tour por la Bahía</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Mañana libre en el hotel. Paseo por Bocagrande y compra de artesanías. Tour por la Bahía de Cartagena con cena a bordo al atardecer." data-lang-en="Free morning at the hotel. Stroll through Bocagrande and souvenir shopping. Cartagena bay tour with dinner on board at golden hour.">Mañana libre en el hotel. Paseo por Bocagrande y compra de artesanías. Tour por la Bahía de Cartagena con cena a bordo al atardecer.</p>
+            </div>
+            <!-- Day 6 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 6" data-lang-en="Day 6">Día 6</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Welcome Ride & Expo" data-lang-en="Welcome Ride & Expo">Welcome Ride & Expo</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Welcome Ride oficial del evento (9–11 Oct). Tarde en la Feria Comercial del Gran Fondo: charlas, artistas invitados, exhibiciones. Recogida del kit oficial." data-lang-en="Official event Welcome Ride (Oct 9–11). Afternoon at the Gran Fondo Trade Fair: talks, guest artists, exhibitions. Official event kit pickup.">Welcome Ride oficial del evento (9–11 Oct). Tarde en la Feria Comercial del Gran Fondo: charlas, artistas invitados, exhibiciones. Recogida del kit oficial.</p>
+            </div>
+            <!-- Day 7 -->
+            <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 7 — ¡El Gran Día!" data-lang-en="Day 7 — The Big Day!">Día 7 — ¡El Gran Día!</p>
+                <p class="text-amber-400 text-xs font-accent">186 km · 1.150 m↑</p>
+              </div>
+              <p class="text-white/70 text-xs" data-lang-es="¡El gran día ha llegado! Carrera junto a Nairo Quintana y sus invitados especiales. Hidratación, asistencia mecánica y fotos en ruta. Cruce de meta como un verdadero profesional. Ceremonia de clausura. Ruta: Cartagena → Santa Rosa de Lima → Villanueva → Cartagena." data-lang-en="The big day has arrived! Race alongside Nairo Quintana and his special guests. Hydration, mechanical support, and photo ops on route. Cross the finish line like a true professional. Closing ceremony. Route: Cartagena → Santa Rosa → Villanueva → Cartagena.">¡El gran día ha llegado! Carrera junto a Nairo Quintana y sus invitados especiales. Hidratación, asistencia mecánica y fotos en ruta. Cruce de meta como un verdadero profesional. Ceremonia de clausura.</p>
+            </div>
+            <!-- Day 8 -->
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-amber-400 font-accent font-bold text-sm" data-lang-es="Día 8" data-lang-en="Day 8">Día 8</p>
+                <p class="text-white/60 text-xs font-accent" data-lang-es="Hasta Pronto" data-lang-en="Farewell">Hasta Pronto</p>
+              </div>
+              <p class="text-white/60 text-xs" data-lang-es="Desayuno incluido. Transfer al aeropuerto de Cartagena. ¡Hasta la próxima gran aventura!" data-lang-en="Breakfast included. Transfer to Cartagena Airport. Until the next great adventure!">Desayuno incluido. Transfer al aeropuerto de Cartagena. ¡Hasta la próxima gran aventura!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12">
+        <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <p class="font-accent font-bold text-2xl text-amber-400">186 km</p>
+          <p class="text-[11px] text-white/50 mt-1" data-lang-es="Gran Fondo" data-lang-en="Gran Fondo">Gran Fondo</p>
+        </div>
+        <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <p class="font-accent font-bold text-2xl text-amber-400">106 km</p>
+          <p class="text-[11px] text-white/50 mt-1" data-lang-es="Medio Fondo" data-lang-en="Medio Fondo">Medio Fondo</p>
+        </div>
+        <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <p class="font-accent font-bold text-2xl text-amber-400">1.150 m</p>
+          <p class="text-[11px] text-white/50 mt-1" data-lang-es="Desnivel Máx" data-lang-en="Max Elevation">Desnivel Máx</p>
+        </div>
+        <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <p class="font-accent font-bold text-2xl text-amber-400">8</p>
+          <p class="text-[11px] text-white/50 mt-1" data-lang-es="Días" data-lang-en="Days">Días</p>
+        </div>
+        <div class="bg-white/5 border border-white/5 rounded-xl p-5 text-center">
+          <p class="font-accent font-bold text-2xl text-amber-400">7</p>
+          <p class="text-[11px] text-white/50 mt-1" data-lang-es="Noches" data-lang-en="Nights">Noches</p>
+        </div>
+      </div>
+
+      <!-- Modalidades de carrera -->
+      <div class="mb-12">
+        <h3 class="font-heading text-2xl text-white mb-2 text-center" data-lang-es="Elige tu Reto" data-lang-en="Choose Your Challenge">Elige tu Reto</h3>
+        <p class="text-white/40 text-xs text-center mb-5 font-accent" data-lang-es="Cartagena (Salida y Llegada) → Santa Rosa de Lima → Villanueva" data-lang-en="Cartagena (Start & Finish) → Santa Rosa de Lima → Villanueva">Cartagena → Santa Rosa de Lima → Villanueva → Cartagena</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 text-center">
+            <p class="text-white font-semibold mb-1 font-accent">Gran Fondo</p>
+            <p class="text-amber-400 font-heading text-3xl">186 km</p>
+            <p class="text-white/50 text-xs mt-1" data-lang-es="1.150 m de desnivel" data-lang-en="1,150 m elevation gain">1.150 m de desnivel</p>
+            <p class="text-amber-400/70 text-[10px] mt-2 italic" data-lang-es="&ldquo;¿Quieres ir más lejos y vivir una experiencia más completa?&rdquo;" data-lang-en="&ldquo;Want to go further and live a more complete experience?&rdquo;">&ldquo;¿Quieres ir más lejos y vivir una experiencia más completa?&rdquo;</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+            <p class="text-white font-semibold mb-1 font-accent">Medio Fondo</p>
+            <p class="text-amber-400 font-heading text-3xl">106 km</p>
+            <p class="text-white/50 text-xs mt-1" data-lang-es="550 m de desnivel" data-lang-en="550 m elevation gain">550 m de desnivel</p>
+            <p class="text-amber-400/70 text-[10px] mt-2 italic" data-lang-es="&ldquo;¿Quieres el equilibrio perfecto entre reto y disfrute?&rdquo;" data-lang-en="&ldquo;Want the perfect balance between challenge and enjoyment?&rdquo;">&ldquo;¿Quieres el equilibrio perfecto entre reto y disfrute?&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qué incluye / No incluye -->
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div>
+          <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Qué Incluye" data-lang-en="What's Included">Qué Incluye</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Alojamiento en hotel boutique" data-lang-en="Boutique hotel accommodation">Alojamiento en hotel boutique</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Traslado aeropuerto entrada/salida (Cartagena)" data-lang-en="Airport transfer in/out (Cartagena)">Traslado aeropuerto entrada/salida (Cartagena)</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Transporte durante todo el viaje" data-lang-en="Transportation throughout the entire trip">Transporte durante todo el viaje</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Desayunos diarios" data-lang-en="Daily breakfasts">Desayunos diarios</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Almuerzos" data-lang-en="Lunches">Almuerzos</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Cenas" data-lang-en="Dinners">Cenas</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Tours guiados con acompañamiento profesional" data-lang-en="Guided tours with professional accompaniment">Tours guiados con acompañamiento profesional</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Kit de ciclismo Santander" data-lang-en="Santander Cycling kit">Kit de ciclismo Santander</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Inscripción al Gran Fondo Nairo Quintana" data-lang-en="Registration for the Gran Fondo Nairo Quintana">Inscripción al Gran Fondo Nairo Quintana</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Hidratación durante las rutas en bicicleta" data-lang-en="Hydration during cycling routes">Hidratación durante las rutas en bicicleta</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Asistencia mecánica" data-lang-en="Mechanical assistance">Asistencia mecánica</span></li>
+            <li class="flex items-start gap-2.5 text-white/70 text-sm"><svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Snacks" data-lang-en="Snacks">Snacks</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="No Incluye" data-lang-en="Not Included">No Incluye</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-2.5 text-white/50 text-sm"><svg class="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg><span data-lang-es="Ítems no mencionados" data-lang-en="Items not mentioned">Ítems no mencionados</span></li>
+            <li class="flex items-start gap-2.5 text-white/50 text-sm"><svg class="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg><span data-lang-es="Gastos personales" data-lang-en="Personal expenses">Gastos personales</span></li>
+            <li class="flex items-start gap-2.5 text-white/50 text-sm"><svg class="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg><span data-lang-es="Tiquetes aéreos al/desde el tour" data-lang-en="Airfare to/from tour">Tiquetes aéreos al/desde el tour</span></li>
+            <li class="flex items-start gap-2.5 text-white/50 text-sm"><svg class="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg><span data-lang-es="Bebidas alcohólicas" data-lang-en="Alcoholic beverages">Bebidas alcohólicas</span></li>
+            <li class="flex items-start gap-2.5 text-white/50 text-sm"><svg class="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg><span data-lang-es="Alquiler de bicicleta" data-lang-en="Bike rental">Alquiler de bicicleta</span></li>
+            <li class="flex items-start gap-2.5 text-white/50 text-sm"><svg class="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg><span data-lang-es="Propinas" data-lang-en="Tips">Propinas</span></li>
+          </ul>
+
+          <!-- Accommodation -->
+          <div class="mt-8">
+            <h3 class="font-heading text-2xl text-white mb-4" data-lang-es="Alojamiento" data-lang-en="Accommodation">Alojamiento</h3>
+            <div class="bg-white/5 border border-white/5 rounded-xl p-4">
+              <p class="text-white/70 text-sm font-semibold mb-2" data-lang-es="Hotel Boutique en Cartagena (o similar)" data-lang-en="Boutique Hotel in Cartagena (or similar)">Hotel Boutique en Cartagena (o similar)</p>
+              <ul class="space-y-1.5 text-white/50 text-xs">
+                <li class="flex items-center gap-2"><svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Piscina con vista al mar" data-lang-en="Rooftop pool with sea views">Piscina con vista al mar</span></li>
+                <li class="flex items-center gap-2"><svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Restaurante" data-lang-en="Restaurant">Restaurante</span></li>
+                <li class="flex items-center gap-2"><svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Habitaciones modernas y confortables" data-lang-en="Modern and comfortable rooms">Habitaciones modernas y confortables</span></li>
+                <li class="flex items-center gap-2"><svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span data-lang-es="Vistas al Caribe" data-lang-en="Caribbean views">Vistas al Caribe</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <a href="https://wa.me/573173780637?text=Hola!%20Quiero%20reservar%20el%20Gran%20Fondo%20Nairo%20Quintana%20con%20Santander%20Cycling" class="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-carbon font-bold px-8 py-4 rounded-full text-base transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.661-6.085-1.797l-.427-.268-2.825.946.946-2.825-.268-.427A9.957 9.957 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          <span data-lang-es="Reservar Gran Fondo Nairo Quintana" data-lang-en="Book Gran Fondo Nairo Quintana">Reservar Gran Fondo Nairo Quintana</span>
+        </a>
+        <p class="text-white/30 text-xs mt-4">info@santandercycling.com · WhatsApp: +57 317 378 0637</p>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
