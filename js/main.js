@@ -277,11 +277,37 @@ function modalGalleryPrev() {
   setModalImage(prev);
 }
 
+// PÁRAMO MODAL
+function openParamoModal() {
+  document.getElementById('paramo-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeParamoModal() {
+  document.getElementById('paramo-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// SIFÓN MODAL
+function openSifonModal() {
+  document.getElementById('sifon-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeSifonModal() {
+  document.getElementById('sifon-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     const chicModal = document.getElementById('chicamocha-modal');
     const cartModal = document.getElementById('cartagena-modal');
-    if (cartModal.classList.contains('active')) {
+    const paramoModal = document.getElementById('paramo-modal');
+    const sifonModal = document.getElementById('sifon-modal');
+    if (paramoModal.classList.contains('active')) {
+      closeParamoModal();
+    } else if (sifonModal.classList.contains('active')) {
+      closeSifonModal();
+    } else if (cartModal.classList.contains('active')) {
       closeCartagenaModal();
     } else if (chicModal.classList.contains('active')) {
       closeChicamochaModal();
@@ -303,7 +329,7 @@ document.addEventListener('keydown', (e) => {
 // CARTAGENA MODAL + GALLERY
 // ==============================
 const cartagenaGalleryImages = [
-  'images/ciclistas/2.webp',
+  'images/nairo/01.webp',
   'images/ciclistas/3.webp',
   'images/ciclistas/5.webp',
   'images/ciclistas/7.webp',
@@ -375,6 +401,69 @@ window.addEventListener('scroll', () => {
 });
 
 // ==============================
+// ==============================
+// CONTACT FORM — BREVO API
+// ==============================
+const BREVO_API_KEY = 'TU_API_KEY_DE_BREVO'; // Reemplaza con tu API key de Brevo
+
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submit = document.getElementById('contact-submit');
+    const spinner = document.getElementById('contact-spinner');
+    const sendIcon = document.getElementById('contact-send-icon');
+    const btnLabel = document.getElementById('contact-btn-label');
+    const successMsg = document.getElementById('contact-success');
+    const errorMsg = document.getElementById('contact-error');
+
+    const nombre = document.getElementById('contact-nombre').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const mensaje = document.getElementById('contact-mensaje').value.trim();
+
+    // Loading state
+    submit.disabled = true;
+    spinner.classList.remove('hidden');
+    sendIcon.classList.add('hidden');
+    btnLabel.textContent = '...';
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    try {
+      const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'api-key': BREVO_API_KEY,
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: { name: nombre, email: email },
+          to: [{ email: 'info@santandercycling.com', name: 'Santander Cycling' }],
+          replyTo: { email: email, name: nombre },
+          subject: `Nuevo mensaje de ${nombre} — Santander Cycling`,
+          htmlContent: `<h3>Nuevo mensaje desde santandercycling.com</h3><p><strong>Nombre:</strong> ${nombre}</p><p><strong>Email:</strong> ${email}</p><p><strong>Mensaje:</strong></p><p>${mensaje.replace(/\n/g, '<br>')}</p>`
+        })
+      });
+
+      if (res.ok) {
+        successMsg.classList.remove('hidden');
+        contactForm.reset();
+      } else {
+        errorMsg.classList.remove('hidden');
+      }
+    } catch {
+      errorMsg.classList.remove('hidden');
+    } finally {
+      submit.disabled = false;
+      spinner.classList.add('hidden');
+      sendIcon.classList.remove('hidden');
+      const lang = document.documentElement.lang || 'es';
+      btnLabel.textContent = lang === 'en' ? 'Send Message' : 'Enviar Mensaje';
+    }
+  });
+}
+
 // SMOOTH SCROLL FOR ANCHOR LINKS
 // ==============================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
